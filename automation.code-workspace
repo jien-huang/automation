@@ -1,6 +1,9 @@
 {
 	"folders": [
 		{
+			"path": "a-front"
+		},
+		{
 			"path": "a-cli"
 		},
 		{
