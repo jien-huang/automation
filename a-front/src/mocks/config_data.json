@@ -1,3 +1,3 @@
 {
-	"config_data":{"method":"get", "url":"/config", "status":200, "data":{}}
+	"config_data":{"method":"get", "url":"/config", "status":200, "data":{"status":"OK"}}
 }
