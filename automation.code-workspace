@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "a-cli"
+		},
+		{
+			"path": "a-lib"
+		},
+		{
+			"path": "a-server"
+		}
+	]
+}
