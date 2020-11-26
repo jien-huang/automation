@@ -6,14 +6,16 @@ import com.github.rvesse.airline.HelpOption;
 import com.github.rvesse.airline.annotations.Command;
 import com.github.rvesse.airline.annotations.Option;
 import com.github.rvesse.airline.annotations.OptionType;
-import com.github.rvesse.airline.annotations.restrictions.AllowedRawValues;
-import com.github.rvesse.airline.annotations.restrictions.Pattern;
-import com.github.rvesse.airline.annotations.restrictions.Required;
+import com.github.rvesse.airline.annotations.restrictions.*;
 
 @Command(name = "run-suite", description = "kick off one automation suite")
 public class RunSuite implements Runnable {
     @Inject
     private HelpOption<RunSuite> help;
+
+    @Option(type = OptionType.COMMAND, name= {"-t" , "--thirdparty"}, description = "Platform of test, e.g.: local, or third party platform like sauce lab, browserstack", title = "Platform")
+    @AllowedRawValues(allowedValues = { "false", "true" })
+    protected String thirdparty = "false";
 
     @Option(type = OptionType.COMMAND, name = { "-b",
             "--browser" }, description = "Type of Browser.", title = "Browser type: chrome|firefox|edge")
