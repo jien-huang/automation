@@ -14,11 +14,13 @@ plugins {
 
 group = 'com.automationtest.lib'
 version = '1.0'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
+    mavenCentral()
+    
 }
 
 dependencies {
@@ -49,4 +51,8 @@ jar {
   from {
     configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
   }
+}
+
+task prepareKotlinBuildScriptModel {
+
 }

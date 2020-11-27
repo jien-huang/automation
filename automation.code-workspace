@@ -12,5 +12,9 @@
 		{
 			"path": "a-server"
 		}
-	]
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.import.gradle.offline.enabled": true
+	}
 }

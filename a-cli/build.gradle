@@ -15,10 +15,11 @@ plugins {
 
 group = 'com.automationtest.cli'
 version = '1.0'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 repositories {
     // Use JCenter for resolving dependencies.
+    mavenCentral()
     jcenter()
 }
 
@@ -49,4 +50,8 @@ jar {
 application {
     // Define the main class for the application.
     mainClass = 'com.automationtest.cli.App'
+}
+
+task prepareKotlinBuildScriptModel {
+
 }
