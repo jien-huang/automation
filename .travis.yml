@@ -3,7 +3,7 @@ cache:
   npm: false
 
 jdk:
-  - openjdk8
+  - openjdk11
 dist: xenial
 services:
   - docker
@@ -26,7 +26,6 @@ install:
   - node -v
   - npm -v
   - npm cache clean --force
-  - npm install -s @angular/cli
 
 script:
   - cd a-lib
