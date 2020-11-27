@@ -29,6 +29,9 @@ install:
   - npm install -s @angular/cli
 
 script:
+  - cd a-lib
+  - gradle build
+  - cd ..
   - gradle clean build test
 
 #deploy:
