@@ -1,0 +1,39 @@
+language: java
+cache:
+  npm: false
+
+jdk:
+  - openjdk8
+dist: xenial
+services:
+  - docker
+
+os: linux
+
+env:
+  - TERM=dumb
+
+before_install:
+  - sudo apt-get install nodejs
+  - sudo wget https://services.gradle.org/distributions/gradle-6.7-bin.zip
+  - unzip -qq gradle-6.7-bin.zip
+  - export GRADLE_HOME=$PWD/gradle-6.7
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - gradle -v
+
+install:
+  - npm install -g node@12.12.0 --force
+  - node -v
+  - npm -v
+  - npm cache clean --force
+  - npm install -s @angular/cli
+
+script:
+  - gradle clean build test
+
+#deploy:
+#  - provider: script
+#    script: gradle pushDockerImage
+#    skip_cleanup: true
+#    on:
+#      branch: master
