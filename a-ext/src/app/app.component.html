@@ -36,7 +36,7 @@
         <small>AT:</small><Label>{{page.timeStamp}}</Label>
       </mat-panel-description>
       <mat-action-row>
-        <button mat-raised-button color="primary" (click)="generate_script(page)">Generate Script</button>
+        <button mat-raised-button color="primary" (click)="generate_script(page)">Generate</button>
         <button mat-raised-button color="accent" [disabled]="!(page.name && page.script)"
           (click)="update_page(page)">Save</button>
         <button mat-raised-button color="warn" [disabled]="!page.name" (click)="delete_page(page.id)">Delete</button>
@@ -56,14 +56,14 @@
       Options
     </ng-template>
     <mat-expansion-panel>
-      <mat-expansion-panel-header>
+      <!-- <mat-expansion-panel-header>
         <mat-panel-title>
           Manage Options
         </mat-panel-title>
         <mat-panel-description>
           <Label>Add, Delete, Update, Save, Load Options</Label>
         </mat-panel-description>
-      </mat-expansion-panel-header>
+      </mat-expansion-panel-header> -->
 
       <mat-form-field class="width-20pc">
         <input matInput placeholder="Name" [(ngModel)]="newName">

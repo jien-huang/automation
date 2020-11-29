@@ -61,7 +61,7 @@ async function getPageObjects() {
             }
             _className = _className + str_array[i].charAt(0).toUpperCase() + str_array[i].slice(1);
         }
-        onePage.name = removeRandomNumberInString(_className).replace(/\./g, '_') + '_Page.js'
+        onePage.name = removeRandomNumberInString(_className).replace(/\./g, '_') + '_Page.pg'
         onePage.timeStamp = new Date().toISOString();
 
         onePage.objects = [];

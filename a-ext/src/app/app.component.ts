@@ -1,5 +1,6 @@
 /// <reference types="@types/chrome" />
 import { Component, OnInit } from '@angular/core';
+import { safeLoad, safeDump } from 'js-yaml';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,7 @@ export class AppComponent implements OnInit {
   pages = [];
   options = [
     { name: 'types', value: 'a,button,submit,input,select' },
-    { name: 'attributes', value: 'id,name,type,value,text,href,title,hidden,tagName' },
-    { name: 'header', value: 'import Page from \'./page-model\''}
+    { name: 'attributes', value: 'id,name,type,value,text,href,title,hidden,tagName' }
   ];
   testExample = `
 import TestcafeExample_Page from './TestcafeExample_Page';
@@ -224,33 +224,8 @@ export default class Page {
 
   generate_script(page: any) {
 
-    let oneScript = '\nexport default class ' + page.name.replace('.js', '') + ' extends Page {';
-
-    oneScript += `
-
-  constructor() {
-    super();
-    this.data = \n`;
-
-    oneScript += JSON.stringify(page.objects, null, 2) + ';\n';
-
-    // add others here
-    oneScript += 'this.id = \'' + page.id + '\';\n';
-    oneScript += 'this.name = \'' + page.name + '\';\n';
-    oneScript += 'this.url = \'' + page.url + '\';\n';
-    oneScript += 'this.CLICKABLE = ' + JSON.stringify(this.getPageClickableField(page.objects), null, 2) + ';\n';
-    oneScript += 'this.BOOLFIELD = ' + JSON.stringify(this.getPageBoolField(page.objects), null, 2) + ';\n';
-    oneScript += 'this.TEXTFIELD = ' + JSON.stringify(this.getPageTextField(page.objects), null, 2) + ';\n';
-    oneScript += 'this.SELECTFIELD = ' + JSON.stringify(this.getPageSelectField(page.objects), null, 2) + ';\n';
-    oneScript += `
-    console.log('Perform on Page:' + this.url + ' Id:' + this.id + ' Page Object:' + this.name);
-  }
-}
-`;
-    const scriptHeader = this.get_one_option_value('header');
-    if (scriptHeader) {
-  oneScript = scriptHeader.value + '\n' + oneScript;
-}
+    let doc = safeLoad(JSON.stringify(page.objects))
+    let oneScript = safeDump(doc) ;  
     page.script = oneScript;
 
   }
