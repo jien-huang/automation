@@ -64,7 +64,7 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public Stream<Path> loadAll() throws FileSystemException {
         try {
-            return Files.walk(this.rootLocation, 1)
+            return Files.walk(this.rootLocation, 1024)
                     .filter(path -> !path.equals(this.rootLocation))
                     .map(this.rootLocation::relativize);
         }

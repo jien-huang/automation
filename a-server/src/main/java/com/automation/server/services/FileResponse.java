@@ -1,5 +1,7 @@
 package com.automation.server.services;
 
+import java.nio.file.Path;
+
 public class FileResponse {
     private String name;
     private String uri;
@@ -44,5 +46,11 @@ public class FileResponse {
         this.uri = uri;
         this.type = type;
         this.size = size;
+    }
+    public FileResponse(Path path) {
+        this.name = path.getFileName().toString();
+        this.uri = path.toUri().toString();
+        this.type = path.toFile().isDirectory()? "Directory":"File";
+        this.size = path.toFile().length();
     }
 }

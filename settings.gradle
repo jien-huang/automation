@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'automation'
-include('a-lib', 'a-cli', 'a-server', 'a-front')
+include('a-lib', 'a-cli', 'a-server', 'a-ext', 'a-front')

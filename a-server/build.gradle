@@ -21,19 +21,19 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compile group: 'com.google.code.gson', name: 'gson'
-	  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation project(':a-lib')
 }
 
 jar {
-  from {
-    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-  }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 task prepareKotlinBuildScriptModel {

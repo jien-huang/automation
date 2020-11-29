@@ -10,6 +10,9 @@
 			"path": "a-lib"
 		},
 		{
+			"path": "a-ext"
+		},
+		{
 			"path": "a-server"
 		}
 	],
