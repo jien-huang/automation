@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+actor user as g
+package server {
+  usecase "check results" as UC5
+  note right
+    # browse results
+    # update results
+    # delete results
+  end note
+  usecase "edit test suites" as UC6
+  note right
+    # create empty
+            test suite, case, ui or data
+    # update
+            test suite, test case, ui and data
+    # upload to git
+  end note
+}
+package cli {
+  usecase "kick off test suite" as UC1
+  note right
+    start a docker with args
+    # download suites and data from git
+    # run test suites
+    # upload results
+  end note
+}
+package ext {
+  usecase "capture ui, data and test case" as UC2
+  note right
+    use chrome extension
+  end note
+}
+g --> UC1
+g --> UC2
+g --> UC5
+g --> UC6
+@enduml
