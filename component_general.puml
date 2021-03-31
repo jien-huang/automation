@@ -1,6 +1,10 @@
 @startuml
 
-title Packages - Component Diagram
+title  Components
+
+package "Extension" {
+    component [Chrome Extension] as Ext
+}
 
 package "Front End" {
     component [React Hooks] as GUI
@@ -12,11 +16,12 @@ package "Client" as Cli {
 
 cloud "Rest API" as Internet {
 }
- 
+
 package "Server" as Server {
-    [Git Access] as GA 
     [File Service] as FS
-} 
+    [Git Access] as GA
+
+}
 
 database "Git Repository\n" as Repo {
     [Test Suites]
@@ -25,10 +30,11 @@ database "Git Repository\n" as Repo {
     [Data]
 }
 
+Ext -down-> Repo
 Docker -down-> FS
-Docker .left. Repo
+Docker .down. Repo
 GUI -down-> Internet
 Internet -down-> Server
-GA .left. Repo
+GA .right. Repo
 
 @enduml
