@@ -1,0 +1,34 @@
+@startuml
+
+title Packages - Component Diagram
+
+package "Front End" {
+    component [React Hooks] as GUI
+}
+
+package "Client" as Cli {
+    component [docker] as Docker
+}
+
+cloud "Rest API" as Internet {
+}
+ 
+package "Server" as Server {
+    [Git Access] as GA 
+    [File Service] as FS
+} 
+
+database "Git Repository\n" as Repo {
+    [Test Suites]
+    [Test Cases]
+    [UI Objects]
+    [Data]
+}
+
+Docker -down-> FS
+Docker .left. Repo
+GUI -down-> Internet
+Internet -down-> Server
+GA .left. Repo
+
+@enduml

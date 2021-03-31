@@ -1,14 +1,14 @@
 @startuml
 left to right direction
-actor user as g
+actor user as user
 package server {
-  usecase "check results" as UC5
+  usecase "check results" as UC3
   note right
     # browse results
     # update results
     # delete results
   end note
-  usecase "edit test suites" as UC6
+  usecase "edit test suites" as UC4
   note right
     # create empty
             test suite, case, ui or data
@@ -32,8 +32,8 @@ package ext {
     use chrome extension
   end note
 }
-g --> UC1
-g --> UC2
-g --> UC5
-g --> UC6
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
 @enduml
