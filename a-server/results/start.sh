@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-browser=chromium
 # Parse the command line and set variables to control logic
 parseCommandLine() {
 	# Special case that nothing was provided on the command line so print usage
@@ -12,13 +11,17 @@ parseCommandLine() {
 	# Indicate specification for single character options
 	# - 1 colon after an option indicates that an argument is required
 	# - 2 colons after an option indicates that an argument is optional, must use -o=argument syntax
-	optstring="hu:b:s:i:B::v"
+	optstring="hu:b:s:i:v"
 	# Indicate specification for long options
 	# - 1 colon after an option indicates that an argument is required
 	# - 2 colons after an option indicates that an argument is optional, must use --option=argument syntax
-
-	GETOPT_OUT=`getopt $optstring "$@"`
-
+	optstringLong="help,url:,branch:,suite:,id:,version"
+	# Parse the options using getopt command
+	# - the -- is a separator between getopt options and parameters to be parsed
+	# - output is simple space-delimited command line
+	# - error message will be printed if unrecognized option or missing parameter but status will be 0
+	# - if an optional argument is not specified, output will include empty string ''
+	GETOPT_OUT=$(getopt --options $optstring --longoptions $optstringLong -- "$@")
 	exitCode=$?
 	if [ $exitCode -ne 0 ]; then
 		echo ""
@@ -34,37 +37,29 @@ parseCommandLine() {
 	# - the error handling will catch cases were argument is missing
 	# - shift over the known number of options/arguments
 	while true; do
+		#echo "Command line option is $opt"
 		case "$1" in
-			-h) # -h or --help  Print usage
+			-h|--help) # -h or --help  Print usage
 				printUsage
 				exit 0
 				;;
-			-u)
+			-u|--url)
 				git_url=$2
 				shift 2
 				;;
-			-b)
+			-b|--branch)
 				git_branch=$2
         shift 2
         ;;
-      -B)
-				browser=$2
-        shift 2
-        ;;
-      -s)
+      -s|--suite)
 				suite=$2
         shift 2
         ;;
-      -r)
-				result_url=$2
-        shift 2
-        ;;
-      -i)
+      -i|--id)
 				id=$2
-				mkdir -p $id
         shift 2
         ;;
-			-v) # -v or --version  Print the version
+			-v|--version) # -v or --version  Print the version
 				printVersion
 				exit 0
 				;;
@@ -99,31 +94,31 @@ printUsage() {
 	echo "Options are:"
 	echo ""
 	echo "-h                    Print help."
-	echo "-u <git repo url>     Specify the git repo url."
-	echo "-b <branch name>      Specify the git branch."
-	echo "-B [browser]          Specify the web browser: default chromium, optional: firefox."
-	echo "-s <entry suite name> Specify the entry test suite name."
-	echo "-i <test id>          Specify the id for upload."
-	echo "-r <results url>      Specify the results url"
-	echo "-v                    Print version."
+	echo "--help"
+	echo "-u url                Specify the git repo url."
+	echo "--url <git repo url>"
+	echo "-b branch             Specify the git branch."
+	echo "--branch <branch name>"
+	echo "-s suite              Specify the entry test suite name."
+	echo "--suite <entry test suite name>"
+	echo "-i id                 Specify the id for upload."
+	echo "--id <test id>"
+	echo "-v                          Print version."
+	echo "--version"
 	echo ""
 }
 
 # Use git to get folders
 handleGit() {
   #git to get content
-  echo "handle Git"
-  echo "git url: $git_url"
-  echo "git branch: $git_branch"
-  echo ""
-#  git init
-#  git remote add -f origin $git_url
-#  git config core.sparsecheckout true
-#  echo suites/ >> .git/info/sparse-checkout
-#  echo cases/ >> .git/info/sparse-checkout
-#  echo ui/ >> .git/info/sparse-checkout
-#  echo data/ >> .git/info/sparse-checkout
-#  git pull origin $git_branch
+  git init
+  git remote add -f origin $git_url
+  git config core.sparsecheckout true
+  echo suites/ >> .git/info/sparse-checkout
+  echo cases/ >> .git/info/sparse-checkout
+  echo ui/ >> .git/info/sparse-checkout
+  echo data/ >> .git/info/sparse-checkout
+  git pull origin $git_branch
 }
 
 # Print the program version
@@ -136,7 +131,6 @@ printVersion() {
 
 startTest() {
   echo "test start ..."
-  echo "folder $id, browser: $browser suite: $suite"
   echo ""
   echo "$id $suite"
   echo "test finished"
@@ -144,9 +138,7 @@ startTest() {
 }
 
 uploadResults() {
-  echo "zip the results folder: $id"
-  echo ""
-  echo "upload to $result_url"
+  echo "upload start ..."
   echo ""
   echo "upload $id"
   echo "upload finished"
@@ -162,17 +154,11 @@ versionDate="2021-05-13"
 # Parse the command line options
 # - pass all arguments to the function
 parseCommandLine "$@"
-exitCode=$?
-if [ $exitCode == 0 ]; then
-  echo ""
-  handleGit
-  startTest
-fi
-uploadResults
 
 #start test & upload results
 
 exit 0
+
 
 
 

@@ -26,9 +26,5 @@ public class AppTest {
         System.setErr(originalErr);
     }
 
-    @Test
-    public void testNoArgs() {
-        App.main(new String[0]);
-        assertTrue("No arugment, it should show help", consoleText.toString().contains("usage:"));
-    }
+    
 }

@@ -24,8 +24,6 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/com.github.rvesse/airline
-    implementation group: 'com.github.rvesse', name: 'airline', version: '2.8.0'
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13'
     implementation project(':a-lib')
