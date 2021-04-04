@@ -146,9 +146,11 @@ startTest() {
 uploadResults() {
   echo "zip the results folder: $id"
   echo ""
+  zip $id
   echo "upload to $result_url"
   echo ""
   echo "upload $id"
+  curl -F
   echo "upload finished"
   echo ""
 }

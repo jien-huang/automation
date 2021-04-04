@@ -3,25 +3,20 @@
  */
 package com.automationtest.cli;
 
-import com.github.rvesse.airline.annotations.Cli;
-import com.github.rvesse.airline.help.Help;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Cli(name = "automation test cli", description = "automation test client tool", 
-defaultCommand = Help.class , commands = {Help.class, RunSuite.class})
 public class App {
+    private final static Logger logger = LoggerFactory.getLogger("cli");
 
     public static void main(String[] args) {
+        logger.info("cli starting ...");
         handle(args);
+        logger.info("cli finished.");
     }
 
     public static void handle(String[] args) {
-        com.github.rvesse.airline.Cli<Runnable> cli = new com.github.rvesse.airline.Cli<>(App.class);
-        try{
-            Runnable cmd = cli.parse(args);
-            cmd.run();
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
+        // TODO: logic
         
     }
 }
