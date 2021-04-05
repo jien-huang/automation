@@ -1,5 +1,8 @@
 package com.automation.server.services;
 
+import com.automationtest.lib.Utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -18,7 +21,7 @@ import java.util.stream.Stream;
 
 @Service
 public class FileSystemStorageService implements StorageService {
-
+    private final Logger logger = LoggerFactory.getLogger ("FileSystemStorageService");
     private final Path rootLocation;
 
     @Autowired
@@ -50,11 +53,17 @@ public class FileSystemStorageService implements StorageService {
                                 + filename);
             }
             try (InputStream inputStream = file.getInputStream()) {
+                logger.debug(this.rootLocation.resolve(filename).toString());
                 Files.copy(inputStream, this.rootLocation.resolve(filename),
                         StandardCopyOption.REPLACE_EXISTING);
+                // if it is a zip file, unzip it
+                if(filename.endsWith(".zip")){
+                    Utils.unzipFile(this.rootLocation.toString()+"/"+filename, this.rootLocation.toString());
+                }
             }
         }
         catch (IOException e) {
+            logger.error(e.getMessage());
             throw new FileSystemException("Failed to store file " + filename);
         }
 

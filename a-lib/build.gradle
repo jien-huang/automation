@@ -45,13 +45,15 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.16'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
+}
 
-
+configurations {
+    all*.exclude module : 'spring-boot-starter-logging'
 }
 
 jar {
-
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }

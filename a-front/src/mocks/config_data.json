@@ -1,3 +1,10 @@
 {
-	"config_data":{"method":"get", "url":"/config", "status":200, "data":{"status":"OK"}}
+	"config_data":{"method":"get", "url":"/config", "status":200, "data":[
+		{"git.url":"https://github.com/jien-huang/automation.git", "descsription": "git url"},
+		{"git.branch": "main", "description": "git branch"},
+		{"results.url": "http://host.docker.internal:8080/upload-file", "description": ""},
+		{"default.browser": "chromium", "description": "browser used for test"},
+		{"default.suite": "main.yml", "description": "default entry test suite"},
+		{"default.results": "results", "description": "default results folder"}
+	]}
 }

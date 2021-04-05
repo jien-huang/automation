@@ -12,7 +12,7 @@ parseCommandLine() {
 	# Indicate specification for single character options
 	# - 1 colon after an option indicates that an argument is required
 	# - 2 colons after an option indicates that an argument is optional, must use -o=argument syntax
-	optstring="hu:b:s:i:B::v"
+	optstring="hu:b:s:i:r:B::v"
 	# Indicate specification for long options
 	# - 1 colon after an option indicates that an argument is required
 	# - 2 colons after an option indicates that an argument is optional, must use --option=argument syntax
@@ -56,7 +56,7 @@ parseCommandLine() {
         shift 2
         ;;
       -r)
-				result_url=$2
+				results_url=$2
         shift 2
         ;;
       -i)
@@ -116,14 +116,14 @@ handleGit() {
   echo "git url: $git_url"
   echo "git branch: $git_branch"
   echo ""
-#  git init
-#  git remote add -f origin $git_url
-#  git config core.sparsecheckout true
-#  echo suites/ >> .git/info/sparse-checkout
-#  echo cases/ >> .git/info/sparse-checkout
-#  echo ui/ >> .git/info/sparse-checkout
-#  echo data/ >> .git/info/sparse-checkout
-#  git pull origin $git_branch
+  git init
+  git remote add -f origin $git_url
+  git config core.sparsecheckout true
+  echo suites/ >> .git/info/sparse-checkout
+  echo cases/ >> .git/info/sparse-checkout
+  echo ui/ >> .git/info/sparse-checkout
+  echo data/ >> .git/info/sparse-checkout
+  git pull origin $git_branch
 }
 
 # Print the program version
@@ -146,11 +146,12 @@ startTest() {
 uploadResults() {
   echo "zip the results folder: $id"
   echo ""
-  zip $id
-  echo "upload to $result_url"
+  zip $id -r $id
+  echo "upload to $results_url"
   echo ""
   echo "upload $id"
-  curl -F
+  curl -F "file=@$id.zip" $results_url
+  echo ""
   echo "upload finished"
   echo ""
 }

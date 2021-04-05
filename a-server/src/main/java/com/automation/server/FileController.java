@@ -63,7 +63,7 @@ public class FileController {
     public FileResponse uploadFile(@RequestParam("file") MultipartFile file) throws FileSystemException {
         String name = storageService.store(file);
 
-        String uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/").path(name).toUriString();
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/results/").path(name.replace(".zip","")).toUriString();
 
         return new FileResponse(name, uri, file.getContentType(), file.getSize());
     }

@@ -8,3 +8,9 @@ bin
 node_modules
 .eslintcache
 dist
+results/
+a-cli/cases/
+a-cli/data/
+a-cli/suites/
+a-cli/ui/
+

@@ -23,6 +23,7 @@ repositories {
 dependencies {
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
     implementation project(':a-lib')
 }
 
@@ -53,9 +54,9 @@ task dockerLogin(type: Exec){
 }
 
 // Enable gradle to use property like -Dspring.profiles.active=dev
-bootRun {
-    systemProperties = System.properties
-}
+//bootRun {
+//    systemProperties = System.properties
+//}
 
 task copyJar(type: Exec){
     commandLine '/bin/sh', '-c', "cp build/libs/${project.name}-${project.version}.jar build/libs/${project.name}.jar"
@@ -63,7 +64,7 @@ task copyJar(type: Exec){
 
 task createDockerImage(type: Exec){
     dependsOn 'copyJar'
-    commandLine '/bin/sh', '-c', "docker build -t ${imageTarget}:${project.version} ."
+    commandLine '/bin/sh', '-c', "docker build --squash -t ${imageTarget}:${project.version} ."
 }
 
 task tagDockerImage(type:Exec){
@@ -72,8 +73,8 @@ task tagDockerImage(type:Exec){
 }
 
 task runLocally(type: Exec) {
-    dependsOn 'createDockerImage'
-    commandLine "docker run -p 8080:8080 ${imageTarget}:${project.version}"
+//    dependsOn 'createDockerImage'
+    commandLine "docker run -ti -p 8080:8080 --rm ${imageTarget}:${project.version} /opt/start.sh -u https://github.com/jien-huang/automation.git -b main -B firefox -s main.yml -i 0001 -r http://localhost:8080/upload-file "
 }
 
 task pushDockerImage(type: Exec){
