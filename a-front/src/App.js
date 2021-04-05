@@ -1,9 +1,8 @@
 import './App.css';
 import { setupWorker } from 'msw';
 import { useState, useEffect } from 'react';
-import "./tailwind.css"
 import useFetch from 'use-http'
-import Dashboard from './Dashboard'
+import Dashboard from './components/Dashboard'
 
 if (process.env.NODE_ENV === 'development') {
   const { handlers } = require('./mocks/handlers');

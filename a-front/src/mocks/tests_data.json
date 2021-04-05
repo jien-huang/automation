@@ -1,0 +1,15 @@
+{
+  "config_data": {
+    "method": "get",
+    "url": "/tests",
+    "status": 200,
+    "data": {
+      "suite": {},
+      "case": {},
+      "ui": [],
+      "data": {
+      }
+    }
+  }
+}
+
