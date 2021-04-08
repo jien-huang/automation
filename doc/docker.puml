@@ -1,0 +1,24 @@
+@startuml Dockerfile
+
+start
+title: Dockerfile
+:upgrade apk;
+:install git;
+:install chromium;
+:install firefox;
+:copy jar;
+:get git branch;
+    note right
+        **git_url **
+        **git_branch**
+    end note
+:start test;
+    note right
+        **browser**: chromium or firefox
+        **suite_name**: start test with test suite name
+        **result_url**: upload result
+    end note
+
+stop
+
+@enduml
