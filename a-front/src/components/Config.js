@@ -51,8 +51,6 @@ export default function Config () {
 
     return (
         <div>
-
-
             <Backdrop className={classes.backdrop} open={loading} >
                 <CircularProgress color="inherit" />
               </Backdrop>
