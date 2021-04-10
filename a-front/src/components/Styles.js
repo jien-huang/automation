@@ -14,10 +14,13 @@ export const useStyles = makeStyles((theme) => ({
         color: '#fff',
     },
     footer: {
-        // padding: theme.spacing(3, 2),
-        marginTop: 'auto',
+        padding: theme.spacing(1),
+        whiteSpace: 'nowrap',
+        display: 'flex',
         alignItems: 'center',
-        position: 'absolute',
+        height: '5px',
+        clear: 'both',
+        position: 'fixed',
         bottom: 0,
         backgroundColor:
             theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
@@ -29,9 +32,12 @@ export const useStyles = makeStyles((theme) => ({
         padding: '0 8px',
         ...theme.mixins.toolbar,
     },
-    // scrollUpIcon: {
-    //     height: 40
-    // },
+    scrollUpIcon: {
+        position: 'fixed',
+        bottom: 0,
+        right: 0,
+        height: 40
+    },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {

@@ -1,8 +1,10 @@
 import './App.css';
 import { setupWorker } from 'msw';
-import { useState, useEffect } from 'react';
-import useFetch from 'use-http'
-import Dashboard from './components/Dashboard'
+import { Switch, Route } from 'react-router-dom';
+import Routes from './components/Routes';
+import NavigationBar from './components/NavigationBar'
+import { Copyright } from './components/Copyright';
+import ScrollTop from './components/ScrollTop';
 
 if (process.env.NODE_ENV === 'development') {
   const { handlers } = require('./mocks/handlers');
@@ -11,20 +13,19 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 function App() {
-  const [data, setData] = useState([])
-  const { get, post, response, loading, error } = useFetch('http://localhost:3000')
-
-  useEffect(() => {
-    loadInitialData();
-  }, [])
-
-  async function loadInitialData() {
-    const res = await get('/config');
-    if (response.ok) setData(response.json)
-  }
-
   return (
-    <Dashboard />
+    <div>
+      <NavigationBar />
+      <Switch>
+        {Routes.map((route) => (
+          <Route exact path={route.path} key={route.path}>
+            <route.component />
+          </Route>
+        ))}
+      </Switch>
+      <Copyright />
+      <ScrollTop />
+    </div>
   );
 }
 
