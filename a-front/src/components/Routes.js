@@ -1,28 +1,8 @@
 import React from 'react';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const Home = () => {
   return (
       <div>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
-    <h1>Home</h1>
     <h1>Home</h1>
     </div>
   );
@@ -43,20 +23,20 @@ const Teams = () => {
 const Routes = [
   {
     path: '/',
-    sidebarName: 'Home',
-    icon: DashboardIcon,
+    sidebarName: 'Dashboard',
+    icon: 'dashboard',
     component: Home
   },
   {
-    path: '/standings',
-    sidebarName: 'Standings',
-    icon: AssignmentIcon,
+    path: '/tests',
+    sidebarName: 'Tests',
+    icon: 'view_list',
     component: Standings
   },
   {
-    path: '/teams',
-    sidebarName: 'Teams',
-    icon: LayersIcon,
+    path: '/configuration',
+    sidebarName: 'Configuration',
+    icon: 'build',
     component: Teams
   },
 ];

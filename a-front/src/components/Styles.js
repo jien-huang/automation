@@ -13,10 +13,14 @@ export const useStyles = makeStyles((theme) => ({
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
     },
+    menuButtonText: {
+        color: 'black'
+    },
     footer: {
         padding: theme.spacing(1),
         whiteSpace: 'nowrap',
         display: 'flex',
+        color: 'grey',
         alignItems: 'center',
         height: '5px',
         clear: 'both',
