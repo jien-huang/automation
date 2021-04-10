@@ -1,7 +1,7 @@
 import './App.css';
 import { setupWorker } from 'msw';
 import { Switch, Route } from 'react-router-dom';
-import Routes from './components/Routes';
+import Routes from './Routes';
 import NavigationBar from './components/NavigationBar'
 import { Copyright } from './components/Copyright';
 import ScrollTop from './components/ScrollTop';

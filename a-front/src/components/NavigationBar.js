@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import Routes from './Routes';
+import Routes from '../Routes';
 import ListItem from '@material-ui/core/ListItem';
 import {
   AppBar,

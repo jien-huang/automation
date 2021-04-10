@@ -7,7 +7,7 @@ const triggerPx = 100 // when you scroll down this number of pixels, then the sc
 
 const ScrollTop = () => {
     const classes = useStyles();
-    const [ show, setShow] = useState(true)
+    const [ show, setShow] = useState(false)
 
     const checkScrollTop = () => {
         var sTop=document.body.scrollTop || document.documentElement.scrollTop;

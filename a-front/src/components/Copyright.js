@@ -7,10 +7,10 @@ export function Copyright() {
     const classes = useStyles();
     return (
         <Typography className={classes.footer}>
-            {'Copyright © '}
+            {'Copyright © '} &nbsp;
             <Link color="inherit" href="http://www.automation-test.com/">
                 www.automation-test.com
-      </Link>{' '}
+      </Link>{' '} &nbsp;
             {new Date().getFullYear()}
             {'.'}
         </Typography>

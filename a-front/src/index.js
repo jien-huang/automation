@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import { SnackBarProvider } from './SnackBarProvider'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-
+  <SnackBarProvider>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-
+  </SnackBarProvider>
   ,
   document.getElementById('root')
 );
