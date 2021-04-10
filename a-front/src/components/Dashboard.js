@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import {useStyles} from './Styles';
+import { useStyles } from './Styles';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -88,6 +88,46 @@ export default function Dashboard() {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         {/* Chart */}
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper className={fixedHeightPaper}>
+                                Chart
+              </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper className={fixedHeightPaper}>
+                                Chart
+              </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper className={fixedHeightPaper}>
+                                Chart
+              </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper className={fixedHeightPaper}>
+                                Chart
+              </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper className={fixedHeightPaper}>
+                                Chart
+              </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper className={fixedHeightPaper}>
+                                Chart
+              </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper className={fixedHeightPaper}>
+                                Chart
+              </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper className={fixedHeightPaper}>
+                                Chart
+              </Paper>
+                        </Grid>
                         <Grid item xs={12} md={8} lg={9}>
                             <Paper className={fixedHeightPaper}>
                                 Chart

@@ -29,6 +29,9 @@ export const useStyles = makeStyles((theme) => ({
         padding: '0 8px',
         ...theme.mixins.toolbar,
     },
+    // scrollUpIcon: {
+    //     height: 40
+    // },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
