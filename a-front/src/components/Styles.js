@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -97,7 +97,7 @@ export const useStyles = makeStyles((theme) => ({
         margin: 4,
     },
     inline: {
-        // display: 'flex',
+        display: 'flex',
         whiteSpace: 'nowrap',
     },
     title: {
@@ -106,15 +106,30 @@ export const useStyles = makeStyles((theme) => ({
         whiteSpace: 'nowrap',
         margin: theme.spacing(1),
     },
-    drawerPaper: {
-        position: 'relative',
-        whiteSpace: 'nowrap',
+    drawer: {
         width: drawerWidth,
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
+        flexShrink: 0,
     },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: theme.spacing(0, 1),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+        justifyContent: 'flex-end',
+    },
+    // drawerPaper: {
+    //     position: 'relative',
+    //     whiteSpace: 'nowrap',
+    //     width: drawerWidth,
+    //     transition: theme.transitions.create('width', {
+    //         easing: theme.transitions.easing.sharp,
+    //         duration: theme.transitions.duration.enteringScreen,
+    //     }),
+    // },
     drawerPaperClose: {
         overflowX: 'hidden',
         transition: theme.transitions.create('width', {
@@ -127,10 +142,29 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     appBarSpacer: theme.mixins.toolbar,
+    // content: {
+    //     flexGrow: 1,
+    //     // height: '100vh',
+    //     overflow: 'auto',
+    // },
     content: {
         flexGrow: 1,
-        // height: '100vh',
         overflow: 'auto',
+        // padding: theme.spacing(1),
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        marginLeft: 0,
+    },
+    contentShift: {
+        flexFlow: 1,
+        overflow: 'auto',
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: drawerWidth,
     },
     container: {
         paddingTop: theme.spacing(4),

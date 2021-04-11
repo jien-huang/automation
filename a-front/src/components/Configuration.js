@@ -19,9 +19,9 @@ import { useSnackbar } from 'notistack';
 export function Configuration() {
   const { closeSnackbar } = useSnackbar();
   const classes = useStyles();
-  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false)
   const [request, setRequest] = useState({ url: 'http://localhost:3000/config', info: { method: 'get' } })
+  const [items, setItems] = useState([]);
   useItems(request)
 
   function useItems(request) {
@@ -66,6 +66,7 @@ export function Configuration() {
       <Backdrop className={classes.backdrop} open={loading} >
         <CircularProgress color="inherit" />
       </Backdrop>
+      <h2>Configurations</h2>
       <Paper className={classes.inline}>
         <Button size="small" variant="contained">Refresh</Button>
         &nbsp;&nbsp;
