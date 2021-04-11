@@ -10,6 +10,7 @@ function getHandlersFromJson(jsonData) {
 			handlers.push(rest.get(el.url, (req, res, context) => {
 				return res(
 					context.status(el.status),
+					context.delay(),
 					context.json(el.data)
 				)
 			}))
@@ -18,6 +19,7 @@ function getHandlersFromJson(jsonData) {
 			handlers.push(rest.post(el.url, (req, res, context) => {
 				return res(
 					context.status(el.status),
+					context.delay(),
 					context.json(el.data)
 				)
 			}))
@@ -26,6 +28,7 @@ function getHandlersFromJson(jsonData) {
 			handlers.push(rest.put(el.url, (req, res, context) => {
 				return res(
 					context.status(el.status),
+					context.delay(),
 					context.json(el.data)
 				)
 			}))
@@ -34,6 +37,7 @@ function getHandlersFromJson(jsonData) {
 			handlers.push(rest.delete(el.url, (req, res, context) => {
 				return res(
 					context.status(el.status),
+					context.delay(),
 					context.json(el.data)
 				)
 			}))
@@ -42,6 +46,7 @@ function getHandlersFromJson(jsonData) {
 			handlers.push(rest.head(el.url, (req, res, context) => {
 				return res(
 					context.status(el.status),
+					context.delay(),
 					context.json(el.data)
 				)
 			}))

@@ -1,6 +1,6 @@
-import { Configuration } from './Configuration';
-import Results from './Results';
-import { Tests } from './Tests';
+import { Configuration } from './components/Configuration';
+import Results from './components/Results';
+import { Tests } from './components/Tests';
 
 const Routes = [
   {
