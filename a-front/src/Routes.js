@@ -1,30 +1,6 @@
-import React, {useContext, useEffect} from 'react';
-import { SnackBarContext } from './SnackBarProvider'
-
-const Results = () => {
-  const { setSnack } = useContext(SnackBarContext);
-  // setSnack({ message: 'hello', open: true})
-  useEffect(()=> {
-    setSnack({ message: 'hello', open: true})
-  },[]);
-  return (
-      <div>
-    <h1>Home</h1>
-    </div>
-  );
-};
-
-const Tests = () => {
-  return (
-    <h1>Standings</h1>
-  );
-};
-
-const Configuration = () => {
-  return (
-    <h1>Teams</h1>
-  );
-};
+import { Configuration } from './Configuration';
+import Results from './Results';
+import { Tests } from './Tests';
 
 const Routes = [
   {

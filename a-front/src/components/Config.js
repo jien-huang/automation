@@ -6,7 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function Config () {
     const classes = useStyles();
-    const [items, SetItems] = useState();
+    const [items, setItems] = useState([]);
     const [loading,setLoading] = useState(false)
     const [request, setRequest] = useState({url: undefined, info: undefined})
     useItems(request)
@@ -21,7 +21,7 @@ export default function Config () {
                 response => {
                     const statusCode = response.status;
                     var data = response.json();
-                    }
+                    
                     if (statusCode >= 400) {
                         // replace this with global popup
                         console.error('Error status: ' + statusCode + ' Message: ' + response.statusText);
@@ -43,7 +43,7 @@ export default function Config () {
             if(response) {
                 setItems(response)
             } else {
-                setItems([...Items, {response}])
+                setItems([...items, {response}])
             }
         }
     }

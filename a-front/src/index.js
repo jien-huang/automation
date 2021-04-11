@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import { SnackBarProvider } from './SnackBarProvider'
+import { SnackbarProvider } from 'notistack'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <SnackBarProvider>
+  <SnackbarProvider maxSnack={5}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </SnackBarProvider>
+  </SnackbarProvider>
   ,
   document.getElementById('root')
 );

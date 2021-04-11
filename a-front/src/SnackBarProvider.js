@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SnackBar from '@material-ui/core/SnackBar';
-
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 export const SnackBarContext = React.createContext({})
 
 
@@ -28,8 +28,11 @@ export function SnackBarProvider({ children }) {
         vertical: 'bottom',
         horizontal: 'left',
       }}
-      open={snack.open} message={snack.message} autoHideDuration={5000}
+      open={snack.open}  autoHideDuration={5000}
       onClose={()=>handleClose()} >
+        <SnackbarContent>
+        message={snack.message}
+        </SnackbarContent>
       </SnackBar>
       {children}
     </SnackBarContext.Provider>
