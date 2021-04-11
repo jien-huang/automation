@@ -92,10 +92,19 @@ export const useStyles = makeStyles((theme) => ({
     menuButtonHidden: {
         display: 'none',
     },
+    divider: {
+        height: 28,
+        margin: 4,
+    },
+    inline: {
+        // display: 'flex',
+        whiteSpace: 'nowrap',
+    },
     title: {
         flexGrow: 1,
         display: 'flex',
         whiteSpace: 'nowrap',
+        margin: theme.spacing(1),
     },
     drawerPaper: {
         position: 'relative',
@@ -120,7 +129,7 @@ export const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
-        height: '100vh',
+        // height: '100vh',
         overflow: 'auto',
     },
     container: {
@@ -128,14 +137,21 @@ export const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(4),
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         display: 'flex',
         overflow: 'auto',
         flexDirection: 'column',
     },
+    iconButton: {
+        padding: 10,
+    },
+    input: {
+        marginLeft: theme.spacing(1),
+        flex: 1,
+    },
     plainPaper: {
         flexGrow: 1,
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         overflow: 'hidden',
         flexDirection: 'column',
     },
