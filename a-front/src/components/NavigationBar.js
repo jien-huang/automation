@@ -60,7 +60,7 @@ const NavigationBar = (props) => {
               return (
                 <NavLink to={prop.path} style={{ textDecoration: 'none' }} key={key}>
                   <MenuItem onClick={() => activeRoute(prop.path)}>
-                    <ListItem className={classes.menuButtonText} button>
+                    <ListItem className={classes.menuButtonText} >
                       <Icon>{prop.icon}</Icon>
                       <ListItemText  primary={prop.sidebarName} ></ListItemText>
                     </ListItem >

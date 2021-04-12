@@ -67,7 +67,7 @@ export function Configuration() {
         <CircularProgress color="inherit" />
       </Backdrop>
       <h2>Configurations</h2>
-      <Paper className={classes.inline}>
+      <Paper className={classes.content}>
         <Button size="small" variant="contained">Refresh</Button>
         &nbsp;&nbsp;
         <Button size="small" variant="contained">Add</Button>&nbsp;&nbsp;
