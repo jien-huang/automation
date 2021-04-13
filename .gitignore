@@ -5,7 +5,8 @@
 build
 bin
 .settings
-node_modules
+a-ext/node_modules
+a-front/node_modules
 .eslintcache
 dist
 results/
