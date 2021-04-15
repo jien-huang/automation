@@ -19,33 +19,14 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
-const data = {
-  id: 'root',
-  name: 'Tests',
-  children: [
-    {
-      id: 'dGVzdHMvdWkvbG9naW5Gb3JtLnltbA==',
-      name: 'Child - 1',
-    },
-    {
-      id: '3',
-      name: 'Child - 3',
-      children: [
-        {
-          id: '4',
-          name: 'Child - 4',
-        },
-      ],
-    },
-  ],
-};
 
 export function Tests() {
   const { closeSnackbar } = useSnackbar();
   const classes = useStyles();
   const [loading, setLoading] = useState(false)
-  const [request, setRequest] = useState({ url: 'http://localhost:3000/tests', info: { method: 'get' } })
+  const [request, setRequest] = useState({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } })
   const [items, setItems] = useState({});
+  const [tree, setTree] = useState();
   const [open, setOpen] = React.useState(false);
 
   useItems(request)
@@ -55,6 +36,10 @@ export function Tests() {
       {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
     </TreeItem>
   );
+
+  const handleTreeReload = () => {
+    setRequest({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } })
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -81,6 +66,10 @@ export function Tests() {
           return Promise.all([statusCode, data]);
         }
       ).then(([statusCode, data]) => {
+        if(request.url.endsWith('/tests') && request.info.method === 'get'){
+          // this is get from tree
+          handleTreeRequest(statusCode, data);
+        }
         handleRequest(statusCode, data);
       }).catch((error) => {
         closeSnackbar('Error : ' + error, { variant: 'error' })
@@ -99,6 +88,17 @@ export function Tests() {
       }
     }
   }
+
+  function handleTreeRequest(statusCode, response) {
+    if (statusCode < 400) {
+      // console.log(response)
+      if (response) {
+        // it should always return the new structure: even just update one item.
+        setTree(response)
+      }
+    }
+  }
+
   return (
     <div className={clsx(classes.content, {
       [classes.appBarShift]: open,
@@ -119,7 +119,7 @@ export function Tests() {
         
         <div className={classes.drawerHeader}>
         <IconButton>
-          <RefreshIcon />
+          <RefreshIcon onClick={handleTreeReload} />
         </IconButton>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <IconButton onClick={handleDrawerClose}>
@@ -133,7 +133,7 @@ export function Tests() {
           defaultExpanded={['root']}
           defaultExpandIcon={<ChevronRightIcon />}
         >
-          {renderTree(data)}
+          {tree && renderTree(tree)}
         </TreeView>
       </Drawer>
 

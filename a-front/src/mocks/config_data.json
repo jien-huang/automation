@@ -1,5 +1,5 @@
 {
-	"config_data":{"method":"get", "url":"/config", "status":200, "data":[
+	"config_data":{"method":"get", "url":"/v1/config", "status":200, "data":[
 		{"name": "git.url","value":"https://github.com/jien-huang/automation.git", "description": "git url"},
 		{"name": "git.branch","value": "main", "description": "git branch"},
 		{"name": "results.url","value": "http://host.docker.internal:8080/upload-file", "description": ""},
@@ -7,13 +7,13 @@
 		{"name": "default.suite","value": "main.yml", "description": "default entry test suite"},
 		{"name": "default.results","value": "results", "description": "default results folder"}
 	]},
-	"add_config": {"method": "post", "url": "/config/add", "status": 200, "data": {
+	"add_config": {"method": "post", "url": "/v1/config/add", "status": 200, "data": {
 		"name": "newItem", "value": "new value", "description": "test add"
 	}},
-	"delete_config": {"method": "delete", "url": "/config/delete", "status": 200, "data": {
+	"delete_config": {"method": "delete", "url": "/v1/config/delete", "status": 200, "data": {
 
 	}},
-	"update_config": {"method": "post", "url": "/config/update/:name", "status": 200, "data": {
+	"update_config": {"method": "post", "url": "/v1/config/update/:name", "status": 200, "data": {
 		"name": "{name}", "value": "updated value", "description": "test update"
 	}}
 }

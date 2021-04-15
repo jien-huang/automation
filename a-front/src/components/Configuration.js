@@ -20,7 +20,7 @@ export function Configuration() {
   const { closeSnackbar } = useSnackbar();
   const classes = useStyles();
   const [loading, setLoading] = useState(false)
-  const [request, setRequest] = useState({ url: 'http://localhost:3000/config', info: { method: 'get' } })
+  const [request, setRequest] = useState({ url: 'http://localhost:3000/v1/config', info: { method: 'get' } })
   const [items, setItems] = useState([]);
   useItems(request)
 

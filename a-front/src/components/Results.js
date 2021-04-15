@@ -74,7 +74,7 @@ export default function Results() {
   const { closeSnackbar } = useSnackbar();
   const classes = useStyles();
   const [loading, setLoading] = useState(false)
-  const [request, setRequest] = useState({ url: 'http://localhost:3000/tests', info: { method: 'get' } })
+  const [request, setRequest] = useState({ url: 'http://localhost:3000/tests', info: { method: 'get' } });
   const [items, setItems] = useState({});
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -92,32 +92,32 @@ export default function Results() {
       if (!request || !request.url || !request.info) {
         return;
       }
-      setLoading(true)
+      setLoading(true);
       fetch(request.url, request.info).then(
         response => {
           const statusCode = response.status;
           var data = response.json();
           if (statusCode >= 400) {
             // replace this with global popup
-            closeSnackbar('Error status: ' + statusCode + ' Message: ' + response.statusText, { variant: 'error' })
+            closeSnackbar('Error status: ' + statusCode + ' Message: ' + response.statusText, { variant: 'error' });
           }
           return Promise.all([statusCode, data]);
         }
       ).then(([statusCode, data]) => {
         handleRequest(statusCode, data);
       }).catch((error) => {
-        closeSnackbar('Error : ' + error, { variant: 'error' })
+        closeSnackbar('Error : ' + error, { variant: 'error' });
       }).finally(() => {
-        setLoading(false)
-      })
-    }, [request])
+        setLoading(false);
+      });
+    }, [request]);
   }
   function handleRequest(statusCode, response) {
     if (statusCode < 400) {
       // console.log(response)
       if (response) {
         // it should always return the new structure: even just update one item.
-        setItems(response)
+        setItems(response);
       }
     }
   }

@@ -1,15 +1,40 @@
 {
-  "config_data": {
+  "tests_data": {
     "method": "get",
-    "url": "/tests",
+    "url": "/v1/tests",
     "status": 200,
     "data": {
-      "suite": {},
-      "case": {},
-      "ui": [],
-      "data": {
-      }
+      "id": "root",
+      "name": "Tests",
+      "children": [
+        {
+          "id": "dGVzdHMvdWkvbG9naW5Gb3JtLnltbA==",
+          "name": "Suite",
+          "type": "folder"
+        },
+        {
+          "id": "3",
+          "name": "Cases",
+          "type": "folder",
+          "children": [
+            {
+              "id": "4",
+              "name": "Case1",
+              "type": "case"
+            }
+          ]
+        },
+        {
+          "id": "UI-1",
+          "name": "UI",
+          "type": "folder"
+        },
+        {
+          "id": "Data-1",
+          "name": "Data",
+          "type": "folder"
+        }
+      ]
     }
   }
 }
-
