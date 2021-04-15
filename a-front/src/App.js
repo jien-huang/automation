@@ -1,8 +1,9 @@
+import React from 'react';
 import './App.css';
 import { setupWorker } from 'msw';
 import { Switch, Route } from 'react-router-dom';
 import Routes from './Routes';
-import NavigationBar from './components/NavigationBar'
+import NavigationBar from './components/NavigationBar';
 import { Copyright } from './components/Copyright';
 import ScrollTop from './components/ScrollTop';
 import Container from '@material-ui/core/Container';

@@ -27,7 +27,7 @@ const NavigationBar = (props) => {
 
   const activeRoute = (routeName) => {
     return props.location.pathname === routeName ? true : false;
-  }
+  };
 
   return (
     <div>

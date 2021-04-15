@@ -19,44 +19,44 @@ import { useSnackbar } from 'notistack';
 export function Configuration() {
   const { closeSnackbar } = useSnackbar();
   const classes = useStyles();
-  const [loading, setLoading] = useState(false)
-  const [request, setRequest] = useState({ url: 'http://localhost:3000/v1/config', info: { method: 'get' } })
+  const [loading, setLoading] = useState(false);
+  const [request, setRequest] = useState({ url: 'http://localhost:3000/v1/config', info: { method: 'get' } });
   const [items, setItems] = useState([]);
-  useItems(request)
+  useItems(request);
 
   function useItems(request) {
     useEffect(() => {
       if (!request || !request.url || !request.info) {
         return;
       }
-      setLoading(true)
+      setLoading(true);
       fetch(request.url, request.info).then(
         response => {
           const statusCode = response.status;
           var data = response.json();
           if (statusCode >= 400) {
             // replace this with global popup
-            closeSnackbar('Error status: ' + statusCode + ' Message: ' + response.statusText, { variant: 'error' })
+            closeSnackbar('Error status: ' + statusCode + ' Message: ' + response.statusText, { variant: 'error' });
           }
           return Promise.all([statusCode, data]);
         }
       ).then(([statusCode, data]) => {
         handleRequest(statusCode, data);
       }).catch((error) => {
-        closeSnackbar('Error : ' + error, { variant: 'error' })
+        closeSnackbar('Error : ' + error, { variant: 'error' });
       }).finally(() => {
-        setLoading(false)
-      })
-    }, [request])
+        setLoading(false);
+      });
+    }, [request]);
   }
 
   function handleRequest(statusCode, response) {
     if (statusCode < 400) {
       // console.log(response)
       if (response) {
-        setItems(response)
+        setItems(response);
       } else {
-        setItems([...items, { response }])
+        setItems([...items, { response }]);
       }
     }
   }
@@ -123,5 +123,5 @@ export function Configuration() {
       </div>
       {/* <pre>{JSON.stringify(items, null, 2)}</pre> */}
     </div>
-  )
+  );
 }

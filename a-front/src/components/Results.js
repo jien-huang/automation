@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import { useStyles } from './Styles';
 import { useSnackbar } from 'notistack';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+// import Typography from '@material-ui/core/Typography';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// import TextField from '@material-ui/core/TextField';
+// import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+// import IconButton from '@material-ui/core/IconButton';
+// import SearchIcon from '@material-ui/icons/Search';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -73,12 +73,13 @@ const rows = [
 export default function Results() {
   const { closeSnackbar } = useSnackbar();
   const classes = useStyles();
-  const [loading, setLoading] = useState(false)
-  const [request, setRequest] = useState({ url: 'http://localhost:3000/tests', info: { method: 'get' } });
+  const [loading, setLoading] = useState(false);
+  const [request, setRequest] = useState({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } });
   const [items, setItems] = useState({});
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  useItems(request);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

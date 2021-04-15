@@ -1,8 +1,8 @@
 module.exports = {
     "env": {
         "browser": true,
-        "node": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
     "extends": [
         "eslint:recommended",
@@ -17,13 +17,21 @@ module.exports = {
     },
     "plugins": ["react"],
     "rules": {
+        "react/prop-types": "warn",
+        "no-unused-vars": "warn",
         "array-bracket-newline": "error",
         "array-bracket-spacing": "off",
         "array-callback-return": "error",
         "array-element-newline": "off",
         "arrow-body-style": "off",
         "arrow-parens": "off",
-        "arrow-spacing": "off",
+        "arrow-spacing": [
+            "error",
+            {
+                "after": true,
+                "before": true
+            }
+        ],
         "block-scoped-var": "off",
         "block-spacing": [
             "error",
@@ -102,7 +110,7 @@ module.exports = {
         "max-classes-per-file": "error",
         "max-depth": "off",
         "max-len": "off",
-        "max-lines": "error",
+        "max-lines": "warn",
         "max-lines-per-function": "off",
         "max-nested-callbacks": "error",
         "max-params": "off",
@@ -199,14 +207,13 @@ module.exports = {
         "no-template-curly-in-string": "error",
         "no-ternary": "off",
         "no-throw-literal": "error",
-        "no-trailing-spaces": "off",
         "no-undef-init": "error",
         "no-undefined": "error",
         "no-underscore-dangle": "off",
         "no-unmodified-loop-condition": "off",
         "no-unneeded-ternary": "off",
         "no-unreachable-loop": "error",
-        "no-unsafe-optional-chaining": "error",
+        "no-unsafe-optional-chaining": "off",
         "no-unused-expressions": "off",
         "no-use-before-define": "off",
         "no-useless-backreference": "error",
@@ -258,7 +265,7 @@ module.exports = {
             "error",
             "never"
         ],
-        "semi": ["error", "always"],
+        "semi": "off",
         "semi-spacing": [
             "error",
             {

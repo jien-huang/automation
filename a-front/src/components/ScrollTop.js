@@ -3,18 +3,18 @@ import {useStyles} from './Styles';
 import Icon from '@material-ui/core/Icon';
 
 
-const triggerPx = 100 // when you scroll down this number of pixels, then the scroll up button show
+const triggerPx = 100; // when you scroll down this number of pixels, then the scroll up button show
 
 const ScrollTop = () => {
     const classes = useStyles();
-    const [ show, setShow] = useState(false)
+    const [ show, setShow] = useState(false);
 
     const checkScrollTop = () => {
         var sTop=document.body.scrollTop || document.documentElement.scrollTop;
         if (!show && sTop > triggerPx) {
-            setShow(true)
+            setShow(true);
         } else if (show && sTop <= triggerPx) {
-            setShow(false)
+            setShow(false);
         }
     };
 
@@ -22,7 +22,7 @@ const ScrollTop = () => {
         window.scrollTo({top:0, behavior: 'smooth'});
     };
 
-    window.addEventListener('scroll', checkScrollTop)
+    window.addEventListener('scroll', checkScrollTop);
 
     return (
         <div>
@@ -30,7 +30,7 @@ const ScrollTop = () => {
                 arrow_upward
             </Icon>
         </div>
-    )
-}
+    );
+};
 
 export default ScrollTop;

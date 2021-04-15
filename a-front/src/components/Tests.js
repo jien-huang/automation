@@ -23,13 +23,13 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 export function Tests() {
   const { closeSnackbar } = useSnackbar();
   const classes = useStyles();
-  const [loading, setLoading] = useState(false)
-  const [request, setRequest] = useState({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } })
+  const [loading, setLoading] = useState(false);
+  const [request, setRequest] = useState({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } });
   const [items, setItems] = useState({});
   const [tree, setTree] = useState();
   const [open, setOpen] = React.useState(false);
 
-  useItems(request)
+  useItems(request);
 
   const renderTree = (nodes) => (
     <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
@@ -38,8 +38,8 @@ export function Tests() {
   );
 
   const handleTreeReload = () => {
-    setRequest({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } })
-  }
+    setRequest({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } });
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -54,14 +54,14 @@ export function Tests() {
       if (!request || !request.url || !request.info) {
         return;
       }
-      setLoading(true)
+      setLoading(true);
       fetch(request.url, request.info).then(
         response => {
           const statusCode = response.status;
           var data = response.json();
           if (statusCode >= 400) {
             // replace this with global popup
-            closeSnackbar('Error status: ' + statusCode + ' Message: ' + response.statusText, { variant: 'error' })
+            closeSnackbar('Error status: ' + statusCode + ' Message: ' + response.statusText, { variant: 'error' });
           }
           return Promise.all([statusCode, data]);
         }
@@ -72,11 +72,11 @@ export function Tests() {
         }
         handleRequest(statusCode, data);
       }).catch((error) => {
-        closeSnackbar('Error : ' + error, { variant: 'error' })
+        closeSnackbar('Error : ' + error, { variant: 'error' });
       }).finally(() => {
-        setLoading(false)
-      })
-    }, [request])
+        setLoading(false);
+      });
+    }, [request]);
   }
 
   function handleRequest(statusCode, response) {
@@ -84,7 +84,7 @@ export function Tests() {
       // console.log(response)
       if (response) {
         // it should always return the new structure: even just update one item.
-        setItems(response)
+        setItems(response);
       }
     }
   }
@@ -94,7 +94,7 @@ export function Tests() {
       // console.log(response)
       if (response) {
         // it should always return the new structure: even just update one item.
-        setTree(response)
+        setTree(response);
       }
     }
   }
