@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import Routes from '../Routes';
-import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItem';
 import {
   AppBar,
   Toolbar,
@@ -58,13 +58,13 @@ const NavigationBar = (props) => {
           <MenuList>
             {Routes.map((prop, key) => {
               return (
-                <NavLink to={prop.path} style={{ textDecoration: 'none' }} key={key}>
-                  <MenuItem onClick={() => activeRoute(prop.path)}>
-                    <ListItem className={classes.menuButtonText} >
+                <NavLink to={prop.path} style={{ textDecoration: 'none' }} key={key} onClick={() => activeRoute(prop.path)}>
+                  {/* <MenuItem key={key} onClick={() => activeRoute(prop.path)}> */}
+                    <ListItemIcon className={classes.menuButtonText} >
                       <Icon>{prop.icon}</Icon>
-                      <ListItemText  primary={prop.sidebarName} ></ListItemText>
-                    </ListItem >
-                  </MenuItem>
+                      <Typography  variant="inherit" >{prop.sidebarName}</Typography>
+                    </ListItemIcon >
+                  {/* </MenuItem> */}
                 </NavLink>
               );
             })}

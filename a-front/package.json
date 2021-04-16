@@ -17,8 +17,8 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start:local": "react-scripts  start",
+    "start": "env-cmd -f .env.production react-scripts start",
+    "start:local": "env-cmd -f .env.development react-scripts  start",
     "build": "react-scripts build",
     "lint": "eslint \"**/*.js\" --ignore-pattern node_modules/ --ignore-pattern build/",
     "test": "react-scripts test",
@@ -26,7 +26,6 @@
   },
   "eslintConfig": {
     "extends": [
-      
       "react-app/jest"
     ]
   },
@@ -46,6 +45,7 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.2",
+    "env-cmd": "^10.1.0",
     "eslint": "^7.24.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",

@@ -18,27 +18,37 @@ import TreeView from '@material-ui/lab/TreeView';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import {TestBoard} from './TestBoard';
 
 
 export function Tests() {
-  const { closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
-  const [request, setRequest] = useState({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } });
+  const [request, setRequest] = useState({ url: process.env.REACT_APP_HOST_URL + '/v1/tests', info: { method: 'get' } });
   const [items, setItems] = useState({});
   const [tree, setTree] = useState();
   const [open, setOpen] = React.useState(false);
+  const [board, setBoard] = useState();
 
   useItems(request);
 
   const renderTree = (nodes) => (
-    <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
+    <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name} onClick={() => selectTreeNode(nodes)}>
       {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
     </TreeItem>
   );
 
+  const selectTreeNode = (nodes) => {
+    if(nodes.type !== 'folder'){
+      //enqueueSnackbar('Select Item: ' + nodes.name + ' id: ' + nodes.id);
+      setBoard(nodes);
+    }
+    
+  }
+
   const handleTreeReload = () => {
-    setRequest({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } });
+    setRequest({ url: process.env.REACT_APP_HOST_URL + '/v1/tests', info: { method: 'get' } });
   };
 
   const handleDrawerOpen = () => {
@@ -155,7 +165,7 @@ export function Tests() {
           <h2>Tests</h2>
         </Paper>
         <div className={classes.plainPaper}>
-          <h1>content of main board</h1>
+          <TestBoard info={board} />
         </div>
 
 

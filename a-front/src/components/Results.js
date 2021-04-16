@@ -21,25 +21,25 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  { id: 'id', label: 'ID', minWidth: 170 },
+  { id: 'Suite', label: 'Suite', minWidth: 100 },
   {
-    id: 'population',
-    label: 'Population',
+    id: 'Result',
+    label: 'Result',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
+    id: 'Start',
+    label: 'Start',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'density',
-    label: 'Density',
+    id: 'End',
+    label: 'End',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
@@ -74,7 +74,7 @@ export default function Results() {
   const { closeSnackbar } = useSnackbar();
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
-  const [request, setRequest] = useState({ url: 'http://localhost:3000/v1/tests', info: { method: 'get' } });
+  const [request, setRequest] = useState({ url: process.env.REACT_APP_HOST_URL + '/v1/tests', info: { method: 'get' } });
   const [items, setItems] = useState({});
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

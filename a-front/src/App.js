@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { setupWorker } from 'msw';
 import { Switch, Route } from 'react-router-dom';
 import Routes from './Routes';
