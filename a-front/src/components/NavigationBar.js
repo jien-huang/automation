@@ -10,8 +10,6 @@ import {
   Drawer,
   MenuList,
   Icon,
-  MenuItem,
-  ListItemText,
 } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -50,7 +48,7 @@ const NavigationBar = (props) => {
           onClick={() => toggleDrawer(false)}
           onKeyDown={() => toggleDrawer(false)} >
           <div className={classes.toolbarIcon}>
-            <IconButton onClick={() => toggleDrawer(false)}>
+            <IconButton >
               <ChevronLeftIcon />
             </IconButton>
           </div>

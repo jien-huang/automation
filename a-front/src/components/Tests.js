@@ -18,7 +18,7 @@ import TreeView from '@material-ui/lab/TreeView';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import {TestBoard} from './TestBoard';
+import { TestBoard } from './TestBoard';
 
 
 export function Tests() {
@@ -40,11 +40,11 @@ export function Tests() {
   );
 
   const selectTreeNode = (nodes) => {
-    if(nodes.type !== 'folder'){
+    if (nodes.type !== 'folder') {
       //enqueueSnackbar('Select Item: ' + nodes.name + ' id: ' + nodes.id);
       setBoard(nodes);
     }
-    
+
   }
 
   const handleTreeReload = () => {
@@ -76,7 +76,7 @@ export function Tests() {
           return Promise.all([statusCode, data]);
         }
       ).then(([statusCode, data]) => {
-        if(request.url.endsWith('/tests') && request.info.method === 'get'){
+        if (request.url.endsWith('/tests') && request.info.method === 'get') {
           // this is get from tree
           handleTreeRequest(statusCode, data);
         }
@@ -117,20 +117,11 @@ export function Tests() {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        
+      <Drawer className={classes.drawer} variant="persistent" anchor="left" open={open} classes={{ paper: classes.drawerPaper, }}>
         <div className={classes.drawerHeader}>
-        <IconButton>
-          <RefreshIcon onClick={handleTreeReload} />
-        </IconButton>
+          <IconButton onClick={handleTreeReload}>
+            <RefreshIcon />
+          </IconButton>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
@@ -167,11 +158,7 @@ export function Tests() {
         <div className={classes.plainPaper}>
           <TestBoard info={board} />
         </div>
-
-
       </main>
-
-
     </div>
   );
 }
