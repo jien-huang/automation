@@ -19,6 +19,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
+import useFetch from 'use-http';
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
@@ -71,15 +72,31 @@ const rows = [
 
 
 export default function Results() {
-  const { closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
-  const [loading, setLoading] = useState(false);
-  const [request, setRequest] = useState({ url: process.env.REACT_APP_HOST_URL + '/v1/tests', info: { method: 'get' } });
+  const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
   const [items, setItems] = useState({});
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  useItems(request);
+  useEffect(() => {
+    console.log(response)
+    if(error) {
+      enqueueSnackbar('Error Happen! Code:'+ response.status +' Message: ' + error.message, { variant: 'error' });
+    }
+  },[error, response]);
+
+  useEffect(() => {
+    loadData();
+  },[]);
+
+  async function loadData() {
+    const data = await get("/v1/results");
+    if(response.ok) {
+      setItems(data);
+    }
+  }
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -88,40 +105,7 @@ export default function Results() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  function useItems(request) {
-    useEffect(() => {
-      if (!request || !request.url || !request.info) {
-        return;
-      }
-      setLoading(true);
-      fetch(request.url, request.info).then(
-        response => {
-          const statusCode = response.status;
-          var data = response.json();
-          if (statusCode >= 400) {
-            // replace this with global popup
-            closeSnackbar('Error status: ' + statusCode + ' Message: ' + response.statusText, { variant: 'error' });
-          }
-          return Promise.all([statusCode, data]);
-        }
-      ).then(([statusCode, data]) => {
-        handleRequest(statusCode, data);
-      }).catch((error) => {
-        closeSnackbar('Error : ' + error, { variant: 'error' });
-      }).finally(() => {
-        setLoading(false);
-      });
-    }, [request]);
-  }
-  function handleRequest(statusCode, response) {
-    if (statusCode < 400) {
-      // console.log(response)
-      if (response) {
-        // it should always return the new structure: even just update one item.
-        setItems(response);
-      }
-    }
-  }
+  
   return (
     <div className={classes.content}>
       <Backdrop className={classes.backdrop} open={loading} >

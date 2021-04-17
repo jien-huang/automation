@@ -15,49 +15,29 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { useSnackbar } from 'notistack';
+import useFetch from 'use-http';
 
 export function Configuration() {
-  const { closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
-  const [loading, setLoading] = useState(false);
-  const [request, setRequest] = useState({ url: process.env.REACT_APP_HOST_URL + '/v1/config', info: { method: 'get' } });
+  const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
   const [items, setItems] = useState([]);
-  useItems(request);
+  
+  useEffect(() => {
+    console.log(response)
+    if(error) {
+      enqueueSnackbar('Error Happen! Code:'+ response.status +' Message: ' + error.message, { variant: 'error' });
+    }
+  },[error, response]);
 
-  function useItems(request) {
-    useEffect(() => {
-      if (!request || !request.url || !request.info) {
-        return;
-      }
-      setLoading(true);
-      fetch(request.url, request.info).then(
-        response => {
-          const statusCode = response.status;
-          var data = response.json();
-          if (statusCode >= 400) {
-            // replace this with global popup
-            closeSnackbar('Error status: ' + statusCode + ' Message: ' + response.statusText, { variant: 'error' });
-          }
-          return Promise.all([statusCode, data]);
-        }
-      ).then(([statusCode, data]) => {
-        handleRequest(statusCode, data);
-      }).catch((error) => {
-        closeSnackbar('Error : ' + error, { variant: 'error' });
-      }).finally(() => {
-        setLoading(false);
-      });
-    }, [request]);
-  }
+  useEffect(() => {
+    loadData();
+  },[]);
 
-  function handleRequest(statusCode, response) {
-    if (statusCode < 400) {
-      // console.log(response)
-      if (response) {
-        setItems(response);
-      } else {
-        setItems([...items, { response }]);
-      }
+  async function loadData() {
+    const data = await get("/v1/config");
+    if(response.ok) {
+      setItems(data);
     }
   }
 
@@ -68,7 +48,7 @@ export function Configuration() {
       </Backdrop>
       <h2>Configurations</h2>
       <Paper className={classes.content}>
-        <Button size="small" variant="contained">Refresh</Button>
+        <Button size="small" variant="contained" onClick={() => loadData()}>Refresh</Button>
         &nbsp;&nbsp;
         <Button size="small" variant="contained">Add</Button>&nbsp;&nbsp;
         &nbsp;&nbsp;

@@ -19,19 +19,36 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { TestBoard } from './TestBoard';
-
+import useFetch from 'use-http';
 
 export function Tests() {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
-  const [loading, setLoading] = useState(false);
-  const [request, setRequest] = useState({ url: process.env.REACT_APP_HOST_URL + '/v1/tests', info: { method: 'get' } });
+  const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
+  // const [request, setRequest] = useState({ url: process.env.REACT_APP_HOST_URL + '/v1/tests', info: { method: 'get' } });
   const [items, setItems] = useState({});
   const [tree, setTree] = useState();
   const [open, setOpen] = React.useState(false);
   const [board, setBoard] = useState();
 
-  useItems(request);
+  useEffect(() => {
+    console.log(response)
+    if(error) {
+      enqueueSnackbar('Error Happen! Code:'+ response.status +' Message: ' + error.message, { variant: 'error' });
+    }
+  },[error, response]);
+
+  useEffect(() => {
+    loadTreeData();
+  },[]);
+
+  async function loadTreeData() {
+    const data = await get("/v1/tests");
+    if(response.ok) {
+      setTree(data);
+    }
+  }
+
 
   const renderTree = (nodes) => (
     <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name} onClick={() => selectTreeNode(nodes)}>
@@ -41,14 +58,12 @@ export function Tests() {
 
   const selectTreeNode = (nodes) => {
     if (nodes.type !== 'folder') {
-      //enqueueSnackbar('Select Item: ' + nodes.name + ' id: ' + nodes.id);
       setBoard(nodes);
     }
-
   }
 
   const handleTreeReload = () => {
-    setRequest({ url: process.env.REACT_APP_HOST_URL + '/v1/tests', info: { method: 'get' } });
+    loadTreeData();
   };
 
   const handleDrawerOpen = () => {
@@ -58,56 +73,6 @@ export function Tests() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  function useItems(request) {
-    useEffect(() => {
-      if (!request || !request.url || !request.info) {
-        return;
-      }
-      setLoading(true);
-      fetch(request.url, request.info).then(
-        response => {
-          const statusCode = response.status;
-          var data = response.json();
-          if (statusCode >= 400) {
-            // replace this with global popup
-            closeSnackbar('Error status: ' + statusCode + ' Message: ' + response.statusText, { variant: 'error' });
-          }
-          return Promise.all([statusCode, data]);
-        }
-      ).then(([statusCode, data]) => {
-        if (request.url.endsWith('/tests') && request.info.method === 'get') {
-          // this is get from tree
-          handleTreeRequest(statusCode, data);
-        }
-        handleRequest(statusCode, data);
-      }).catch((error) => {
-        closeSnackbar('Error : ' + error, { variant: 'error' });
-      }).finally(() => {
-        setLoading(false);
-      });
-    }, [request]);
-  }
-
-  function handleRequest(statusCode, response) {
-    if (statusCode < 400) {
-      // console.log(response)
-      if (response) {
-        // it should always return the new structure: even just update one item.
-        setItems(response);
-      }
-    }
-  }
-
-  function handleTreeRequest(statusCode, response) {
-    if (statusCode < 400) {
-      // console.log(response)
-      if (response) {
-        // it should always return the new structure: even just update one item.
-        setTree(response);
-      }
-    }
-  }
 
   return (
     <div className={clsx(classes.content, {
