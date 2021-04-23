@@ -6,6 +6,7 @@
     "data": {
       "id": "root",
       "name": "Tests",
+      "type": "root",
       "children": [
         {
           "id": "dGVzdHMvdWkvbG9naW5Gb3JtLnltbA==",

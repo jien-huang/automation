@@ -20,32 +20,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import useFetch from 'use-http';
-
-const columns = [
-  { id: 'id', label: 'ID', minWidth: 100 },
-  { id: 'suite', label: 'Suite', minWidth: 200 },
-  {
-    id: 'result',
-    label: 'Result',
-    minWidth:70,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'start',
-    label: 'Start',
-    minWidth: 100,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'end',
-    label: 'End',
-    minWidth: 100,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-];
+import { columns, API_GET_ALL_RESULTS } from '../utils/Constants';
 
 function createData(id, suite, result, start) {
   const end = start;
@@ -90,11 +65,38 @@ export default function Results() {
     loadData();
   },[]);
 
+  
   async function loadData() {
-    const data = await get("/v1/results");
+    const data = await get(API_GET_ALL_RESULTS);
     if(response.ok) {
       setItems(data);
     }
+  }
+
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+  
+  function getComparator(order, orderBy) {
+    return order === 'desc'
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+  
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
   }
 
   const handleChangePage = (event, newPage) => {

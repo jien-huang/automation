@@ -20,12 +20,12 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { TestBoard } from './TestBoard';
 import useFetch from 'use-http';
+import {DATA_TYPE} from '../utils/Constants';
 
 export function Tests() {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
-  // const [request, setRequest] = useState({ url: process.env.REACT_APP_HOST_URL + '/v1/tests', info: { method: 'get' } });
   const [items, setItems] = useState({});
   const [tree, setTree] = useState();
   const [open, setOpen] = React.useState(false);
@@ -57,7 +57,7 @@ export function Tests() {
   );
 
   const selectTreeNode = (nodes) => {
-    if (nodes.type !== 'folder') {
+    if (nodes.type !== DATA_TYPE.FOLDER && nodes.type !== DATA_TYPE.ROOT) {
       setBoard(nodes);
     }
   }
@@ -66,8 +66,8 @@ export function Tests() {
     loadTreeData();
   };
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleDrawerToggle = () => {
+    setOpen(!open);
   };
 
   const handleDrawerClose = () => {
@@ -112,7 +112,7 @@ export function Tests() {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={handleDrawerToggle}
             edge="start"
             className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
           >

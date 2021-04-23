@@ -27,7 +27,6 @@ function App() {
                     <Grid container spacing={1}>
                     <route.component />
                     </Grid>
-            
             </Container>
           </Route>
         ))}
