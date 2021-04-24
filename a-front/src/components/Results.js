@@ -64,7 +64,6 @@ export default function Results() {
   useEffect(() => {
     loadData();
   },[]);
-
   
   async function loadData() {
     const data = await get(API_GET_ALL_RESULTS);
