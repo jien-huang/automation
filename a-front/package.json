@@ -7,13 +7,12 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "*",
     "@types/react-router-dom": "^5.1.7",
-    "axios": "^0.21.1",
-    "notistack": "^1.0.5",
+    "notistack": "^1.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "use-http": "^1.0.19",
+    "use-http": "^1.0.20",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
@@ -60,17 +59,17 @@
     "@storybook/node-logger": "^6.2.9",
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.2.9",
-    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^13.1.3",
+    "@testing-library/user-event": "^13.1.5",
     "env-cmd": "^10.1.0",
-    "eslint": "^7.24.0",
+    "eslint": "^7.25.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.23.2",
-    "msw": "^0.28.1"
+    "msw": "^0.28.2"
   },
   "msw": {
     "workerDirectory": "public"
