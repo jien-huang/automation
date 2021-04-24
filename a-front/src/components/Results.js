@@ -10,6 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link';
 // import IconButton from '@material-ui/core/IconButton';
 // import SearchIcon from '@material-ui/icons/Search';
 import Table from '@material-ui/core/Table';
@@ -21,56 +22,83 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import useFetch from 'use-http';
 import { columns, API_GET_ALL_RESULTS } from '../utils/Constants';
-
-function createData(id, suite, result, start) {
-  const end = start;
-  return { id, suite, result, start, end };
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
-];
-
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Switch from '@material-ui/core/Switch';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
 
 export default function Results() {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('end');
   const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
-  const [items, setItems] = useState({});
+  const [items, setItems] = useState();
+  const [display, setDisplay] = useState(items);
+  const [dense, setDense] = React.useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [ignored, setIgnored] = useState(0);
+  const [success, setSuccess] = useState(0);
+  const [failed, setFailed] = useState(0);
 
   useEffect(() => {
-    console.log(response)
-    if(error) {
-      enqueueSnackbar('Error Happen! Code:'+ response.status +' Message: ' + error.message, { variant: 'error' });
+    // console.log(response)
+    if (error) {
+      enqueueSnackbar('Error Happen! Code:' + response.status + ' Message: ' + error.message, { variant: 'error' });
     }
-  },[error, response]);
+  }, [error, response]);
 
   useEffect(() => {
     loadData();
-  },[]);
-  
+  }, []);
+
+  useEffect(() => {
+    setDisplay(items)
+  }, [items])
+
+  useEffect(() => {
+    calculate()
+  }, [display])
+
+  function calculate() {
+    if (display && display.length > 0) {
+      var _success = 0;
+      var _ignored = 0;
+      var _failed = 0;
+      display.forEach(element => {
+        if (element.result === 'Success') {
+          _success++;
+        }
+        if (element.result === 'Ignored') {
+          _ignored++;
+        }
+        if (element.result === 'Failed') {
+          _failed++;
+        }
+
+      });
+      setFailed(_failed);
+      setSuccess(_success);
+      setIgnored(_ignored);
+    }
+  }
+
   async function loadData() {
     const data = await get(API_GET_ALL_RESULTS);
-    if(response.ok) {
+    if (response.ok) {
+      // console.log(data)
       setItems(data);
     }
   }
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
 
   function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -81,14 +109,17 @@ export default function Results() {
     }
     return 0;
   }
-  
+
   function getComparator(order, orderBy) {
     return order === 'desc'
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
   }
-  
+
   function stableSort(array, comparator) {
+    if (!array || array.length <= 0) {
+      return [];
+    }
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
       const order = comparator(a[0], b[0]);
@@ -102,88 +133,125 @@ export default function Results() {
     setPage(newPage);
   };
 
+  const handleChangeDense = (event) => {
+    setDense(event.target.checked);
+  };
+
+  const createSortHandler = (property) => (event) => {
+    handleRequestSort(event, property);
+  };
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  
+
   return (
     <div className={classes.content}>
       <Backdrop className={classes.backdrop} open={loading} >
         <CircularProgress color="inherit" />
       </Backdrop>
       <h2>Results</h2>
-
-      <Paper className={classes.content}>
-
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="summary">
-            <TableBody>
-              <TableRow>
-                <TableCell rowSpan={3} />
-                <TableCell colSpan={2}>Total Results</TableCell>
-                <TableCell align="right">331</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Passed</TableCell>
-                <TableCell align="right">101 ignored</TableCell>
-                <TableCell align="right">300</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell colSpan={2}>Failed</TableCell>
-                <TableCell align="right">31</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-
-      <Divider className={classes.divider} />
-
-      <div className={classes.plainPaper}>
-        {/* put table here */}
-        <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+      {display && display.length > 0 && <div>
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          ActionsComponent={() => {
+            return (<div className={classes.conorInline}><FormControlLabel
+              control={<Switch checked={dense} onChange={handleChangeDense} />}
+              label="Dense"
+            />
+              <IconButton className={classes.iconButton} aria-label="Filter">
+                <SearchIcon />
+              </IconButton>
+              <TextField
+                className={classes.searchBox}
+                placeholder="Filter"
+                inputProps={{ 'aria-label': 'Filter' }}
+              /></div>)
+          }}
+          count={display.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}/>
-      </div>
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+        <Paper className={classes.content}>
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="summary" size={dense ? 'small' : 'medium'}>
+              <TableBody>
+                <TableRow>
+                  <TableCell rowSpan={3} />
+                  <TableCell colSpan={2}>Total Results</TableCell>
+                  <TableCell align="right">{display.length}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Passed</TableCell>
+                  <TableCell align="right">{ignored} (Ignored)</TableCell>
+                  <TableCell align="right">{ignored + success}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell colSpan={2}>Failed</TableCell>
+                  <TableCell align="right">{failed}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+
+        <Divider className={classes.divider} />
+
+        <div className={classes.plainPaper}>
+          {/* put table here */}
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label="sticky table" className={classes.table} size={dense ? 'small' : 'medium'}>
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      sortDirection={orderBy == column.id ? order : false}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      <TableSortLabel
+                        active={orderBy === column.id}
+                        direction={orderBy === column.id ? order : 'asc'}
+                        onClick={createSortHandler(column.id)}
+                      >
+                        {column.label}
+                        {orderBy === column.id ? (
+                          <span className={classes.visuallyHidden}>
+                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                          </span>
+                        ) : null}
+                      </TableSortLabel>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {stableSort(display, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                  return (
+                    <TableRow hover style={{ height: (dense ? 4 : 64) }} role="checkbox" tabIndex={-1} key={row.id}>
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.id !== "id" && value}
+                            {column.id === "id" && <Link href={`results/oneResult/${value}`} color={"inherit"}>{value}</Link>}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+        </div>
+      </div>}
     </div>
   );
 }

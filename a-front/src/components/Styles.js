@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 400;
+const drawerWidth = 512;
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -100,6 +100,11 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         whiteSpace: 'nowrap',
     },
+    conorInline: {
+        display: 'flex',
+        whiteSpace: 'nowrap',
+        margin: theme.spacing(4),
+    },
     title: {
         flexGrow: 1,
         display: 'flex',
@@ -141,6 +146,11 @@ export const useStyles = makeStyles((theme) => ({
             width: theme.spacing(9),
         },
     },
+    searchBox: {
+        marginLeft: theme.spacing(2),
+        flex: 1,
+        width: theme.spacing(32),
+    },
     appBarSpacer: theme.mixins.toolbar,
     // content: {
     //     flexGrow: 1,
@@ -180,9 +190,20 @@ export const useStyles = makeStyles((theme) => ({
         padding: 10,
     },
     input: {
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(2),
         flex: 1,
     },
+    visuallyHidden: {
+        border: 0,
+        clip: 'rect(0 0 0 0)',
+        height: 1,
+        margin: -1,
+        overflow: 'hidden',
+        padding: 0,
+        position: 'absolute',
+        top: 20,
+        width: 1,
+      },
     plainPaper: {
         flexGrow: 1,
         padding: theme.spacing(1),

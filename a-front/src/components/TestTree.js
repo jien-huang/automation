@@ -38,6 +38,7 @@ export default function TestTree({ parentCallback }) {
     }
 
     const renderTree = (nodes) => (
+        // Don't render it before whole system working !!!
         <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name} onClick={() => selectTreeNode(nodes)}>
             {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
         </TreeItem>

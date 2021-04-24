@@ -55,16 +55,17 @@ const NavigationBar = (props) => {
           <Divider />
           <MenuList>
             {Routes.map((prop, key) => {
-              return (
-                <NavLink to={prop.path} style={{ textDecoration: 'none' }} key={key} onClick={() => activeRoute(prop.path)}>
-                  {/* <MenuItem key={key} onClick={() => activeRoute(prop.path)}> */}
-                    <ListItemIcon className={classes.menuButtonText} >
-                      <Icon>{prop.icon}</Icon>
-                      <Typography  variant="inherit" >{prop.sidebarName}</Typography>
-                    </ListItemIcon >
-                  {/* </MenuItem> */}
-                </NavLink>
-              );
+              if (prop.icon && prop.sidebarName){
+                return (
+                  <NavLink to={prop.path} style={{ textDecoration: 'none' }} key={key} onClick={() => activeRoute(prop.path)}>
+                      <ListItemIcon className={classes.menuButtonText} >
+                        <Icon>{prop.icon}</Icon>
+                        <Typography  variant="inherit" >{prop.sidebarName}</Typography>
+                      </ListItemIcon >
+                  </NavLink>
+                );
+              }
+              return (<div key={key}></div>)
             })}
           </MenuList>
         </div>

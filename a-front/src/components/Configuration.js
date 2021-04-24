@@ -22,9 +22,10 @@ export function Configuration() {
   const classes = useStyles();
   const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
   const [items, setItems] = useState([]);
+  const [display, setDisplay] = useState(items);
   
   useEffect(() => {
-    console.log(response)
+    // console.log(response)
     if(error) {
       enqueueSnackbar('Error Happen! Code:'+ response.status +' Message: ' + error.message, { variant: 'error' });
     }
@@ -33,6 +34,8 @@ export function Configuration() {
   useEffect(() => {
     loadData();
   },[]);
+
+  useEffect(() => {setDisplay(items)}, [items])
 
   async function loadData() {
     const data = await get("/v1/config");
@@ -71,7 +74,7 @@ export function Configuration() {
 
       <Divider className={classes.divider} />
       <div className={classes.plainPaper}>
-        {items && items.map(item => (
+        {display && display.map(item => (
           <Accordion className={classes.content} key={item.name}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}

@@ -1,5 +1,6 @@
 import { Configuration } from './components/Configuration';
 import Results from './components/Results';
+import OneResult from './components/OneResult';
 import { Tests } from './components/Tests';
 
 const Routes = [
@@ -8,6 +9,10 @@ const Routes = [
     sidebarName: 'Results',
     icon: 'dashboard',
     component: Results
+  },
+  {
+    path: '/results/oneResult/:id',
+    component: OneResult
   },
   {
     path: '/tests',

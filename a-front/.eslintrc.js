@@ -17,8 +17,8 @@ module.exports = {
     },
     "plugins": ["react"],
     "rules": {
-        "react/prop-types": "warn",
-        "no-unused-vars": "warn",
+        "react/prop-types": "off",
+        "no-unused-vars": "off", // TODO: turn it to warn later
         "array-bracket-newline": "error",
         "array-bracket-spacing": "off",
         "array-callback-return": "error",
