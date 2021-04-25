@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 // import clsx from 'clsx';
 import { useStyles } from './Styles';
 import { useSnackbar } from 'notistack';
@@ -21,13 +21,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import useFetch from 'use-http';
-import { columns, API_GET_ALL_RESULTS } from '../utils/Constants';
+import { columns, API_GET_ALL_RESULTS, checkItemMatch, DEBOUNCE_PAUSE } from '../utils/Constants';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Switch from '@material-ui/core/Switch';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
+import _ from 'lodash';
 
 export default function Results() {
   const { enqueueSnackbar } = useSnackbar();
@@ -43,6 +44,7 @@ export default function Results() {
   const [ignored, setIgnored] = useState(0);
   const [success, setSuccess] = useState(0);
   const [failed, setFailed] = useState(0);
+  const [searchString, setSearchString] = useState('');
 
   useEffect(() => {
     // console.log(response)
@@ -62,6 +64,29 @@ export default function Results() {
   useEffect(() => {
     calculate()
   }, [display])
+
+  useEffect(() => {setDisplay(items)}, [items])
+
+  const search = useCallback(_.debounce(() => {
+    if (!searchString || searchString === null || searchString.length === 0) {
+      if(items && items.length>0){
+        setDisplay(items);
+      }
+      
+    } else {
+      var newDisplay = _.filter(items, function (item) {
+        return checkItemMatch(item, searchString)
+      })
+      setDisplay(newDisplay);
+    }
+    
+  }, DEBOUNCE_PAUSE), [searchString])
+
+  function handleSearch(e) {
+    setSearchString(e.target.value);
+  }
+
+  useEffect(() => {search()}, [search]);
 
   function calculate() {
     if (display && display.length > 0) {
@@ -168,6 +193,7 @@ export default function Results() {
                 className={classes.searchBox}
                 placeholder="Filter"
                 inputProps={{ 'aria-label': 'Filter' }}
+                onChange={handleSearch} value={searchString}
               /></div>)
           }}
           count={display.length}

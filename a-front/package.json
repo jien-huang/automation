@@ -7,6 +7,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "*",
     "@types/react-router-dom": "^5.1.7",
+    "lodash": "^4.17.21",
     "notistack": "^1.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

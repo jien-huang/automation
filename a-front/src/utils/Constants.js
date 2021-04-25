@@ -35,3 +35,32 @@ export const DATA_TYPE= {
 
 export const API_GET_ALL_RESULTS = "/v1/results";
 
+export function checkItemMatch(item, searchString) {
+  if(!item){
+    return false;
+  }
+  if (!searchString) {
+    return true;
+  }
+  var content = JSON.stringify(item);
+  if(content.includes(searchString)){
+    return true;
+  }
+  // if(isValidRegex(searchString)) {
+  //   return content.match(searchString) != null
+  // }
+  return false;
+}
+
+export const DEBOUNCE_PAUSE = 500;
+
+// function isValidRegex(str){
+//   var isValid = true;
+//   try{
+//     new RegExp(str, 'gi');
+//   } catch(e) {
+//     isValid = false
+//   }
+//   return isValid
+// }
+
