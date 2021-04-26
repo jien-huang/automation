@@ -24,9 +24,9 @@ export function Configuration() {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
-  const [name, setName ] = useState();
-  const [value, setValue ] = useState();
-  const [description, setDescription ] = useState();
+  const [name, setName] = useState();
+  const [value, setValue] = useState();
+  const [description, setDescription] = useState();
   const [searchString, setSearchString] = useState('');
   const [items, setItems] = useState([]);
   const [display, setDisplay] = useState(items);
@@ -38,7 +38,7 @@ export function Configuration() {
     }
   }, [error]);
 
-  
+
 
   async function loadData() {
     const data = await get("/v1/config");
@@ -50,17 +50,17 @@ export function Configuration() {
   const search = useCallback(_.debounce(() => {
     if (!searchString || searchString === null || searchString.length === 0) {
       // console.log("in usecallback 1:", items, !searchString, searchString.length)
-      if(items.length>0) {
+      if (items.length > 0) {
         setDisplay(items);
       }
-      
+
     } else {
       var newDisplay = _.filter(items, function (item) {
         return checkItemMatch(item, searchString)
       })
       setDisplay(newDisplay);
     }
-    
+
   }, DEBOUNCE_PAUSE), [searchString])
 
   useEffect(() => {
@@ -88,22 +88,25 @@ export function Configuration() {
   }
 
   async function updateData(updatedData) { // assume we should not update the name, use it as id
-    const data = await post("/v1/config/update/" + updateData.name, updateData);
+    const data = await post("/v1/config/update/" + updatedData.name, updatedData);
     if (response.ok) {
-      var objIndex = items.findIndex((obj => obj.name == updateData.name));
-      items[objIndex] = data;
-      setItems(items);
+      var itemsCopy = items.filter(() => true);
+      var objIndex = itemsCopy.findIndex((obj => obj && obj.name === data.name));
+      if (objIndex >= 0) {
+        itemsCopy[objIndex] = data;
+        setItems(itemsCopy);
+      }
     }
   }
 
   async function deleteData(name) {
-    const data = await delete("/v1/config/delete/" + name);
+    console.log('in delete func')
+    await delete("/v1/config/delete/" + name);
     if (response.ok) {
-      var objIndex = items.findIndex((obj => obj.name == name));
-      delete items[objIndex]
-      setItems(items);
-    }
+      var itemsCopy = items.filter((obj => obj && obj.name != name));
+      setItems(itemsCopy);
 
+    }
   }
 
   async function addData(newData) {
@@ -138,11 +141,11 @@ export function Configuration() {
         &nbsp;&nbsp;
         <TextField className={classes.input} placeholder="Name" onChange={handleName} value={name} />
         &nbsp;&nbsp;
-        <TextField className={classes.input} placeholder="Value" onChange={handleValue} value={value}/>
+        <TextField className={classes.input} placeholder="Value" onChange={handleValue} value={value} />
         &nbsp;&nbsp;
         <TextField className={classes.searchBox} placeholder="Description" onChange={handleDescription} value={description} />
         &nbsp;&nbsp;
-        <Button className={classes.button} size="small" onClick={() => addData({'name':name, 'value':value, 'description': description})}
+        <Button className={classes.button} size="small" onClick={() => addData({ 'name': name, 'value': value, 'description': description })}
           variant="contained" disabled={!name || !value}>Add
         </Button>
       </Paper>
@@ -165,15 +168,15 @@ export function Configuration() {
             </AccordionSummary>
             <AccordionDetails className={classes.details}>
               <Paper className={classes.inline} >
-                <TextField label="Value" fullWidth className={classes.searchBox} defaultValue={item.value} />
+                <TextField label="Value" fullWidth className={classes.searchBox} value={item.value} />
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <TextField label="Description" fullWidth className={classes.searchBox} defaultValue={item.description} />
+                  <TextField label="Description" fullWidth className={classes.searchBox} value={item.description} />
               </Paper>
             </AccordionDetails>
             <Divider />
             <AccordionActions>
-              <Button variant="contained" size="small">Delete</Button>
-              <Button variant="contained" size="small" color="primary">Update</Button>
+              <Button variant="contained" size="small" onClick={() => deleteData(item.name)}>Delete</Button>
+              <Button variant="contained" size="small" color="primary" onClick={() => updateData(item)}>Update</Button>
             </AccordionActions>
           </Accordion>
 

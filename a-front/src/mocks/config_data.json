@@ -10,10 +10,10 @@
 	"add_config": {"method": "post", "url": "/v1/config/add", "status": 200, "data": {
 		"name": "newItem", "value": "new value", "description": "test add"
 	}},
-	"delete_config": {"method": "delete", "url": "/v1/config/delete", "status": 200, "data": {
-
+	"delete_config": {"method": "delete", "url": "/v1/config/delete/:name", "status": 200, "data": {
+		
 	}},
 	"update_config": {"method": "post", "url": "/v1/config/update/:name", "status": 200, "data": {
-		"name": "{name}", "value": "updated value", "description": "test update"
+		"name": "git.url", "value": "updated value", "description": "test update"
 	}}
 }
