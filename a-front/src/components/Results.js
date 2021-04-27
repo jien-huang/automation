@@ -30,7 +30,7 @@ export default function Results() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('end');
-  const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
+  const { get, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
   const [items, setItems] = useState();
   const [display, setDisplay] = useState(items);
   const [dense, setDense] = React.useState(false);

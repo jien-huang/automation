@@ -13,13 +13,12 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { useSnackbar } from 'notistack';
 import useFetch from 'use-http';
 import Grid from '@material-ui/core/Grid';
 import { debounce, filter } from 'lodash';
-import { InputAdornment, InputLabel } from '@material-ui/core';
+import { InputAdornment } from '@material-ui/core';
 import { checkItemMatch, DEBOUNCE_PAUSE } from '../utils/Constants';
 
 export function Configuration() {
