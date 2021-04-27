@@ -17,7 +17,9 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { useSnackbar } from 'notistack';
 import useFetch from 'use-http';
-import _ from 'lodash';
+import Grid from '@material-ui/core/Grid';
+import { debounce, filter } from 'lodash';
+import { InputAdornment, InputLabel } from '@material-ui/core';
 import { checkItemMatch, DEBOUNCE_PAUSE } from '../utils/Constants';
 
 export function Configuration() {
@@ -47,7 +49,7 @@ export function Configuration() {
     }
   }
 
-  const search = useCallback(_.debounce(() => {
+  const search = useCallback(debounce(() => {
     if (!searchString || searchString === null || searchString.length === 0) {
       // console.log("in usecallback 1:", items, !searchString, searchString.length)
       if (items.length > 0) {
@@ -55,13 +57,15 @@ export function Configuration() {
       }
 
     } else {
-      var newDisplay = _.filter(items, function (item) {
+      var newDisplay = filter(items, function (item) {
         return checkItemMatch(item, searchString)
       })
       setDisplay(newDisplay);
     }
 
   }, DEBOUNCE_PAUSE), [searchString])
+
+
 
   useEffect(() => {
     loadData();
@@ -126,14 +130,17 @@ export function Configuration() {
       </Backdrop>
       <h2>Configurations</h2>
       <Paper className={classes.content}>
-        <IconButton className={classes.iconButton} aria-label="Filter">
-          <SearchIcon />
-        </IconButton>
         <TextField
-          className={classes.searchBox}
-          placeholder="Filter"
-          inputProps={{ 'aria-label': 'Filter' }}
-          onChange={handleSearch} value={searchString}
+          className={classes.searchBox} onChange={handleSearch} value={searchString}
+          id="Filter"
+          label="Filter"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
         />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Button className={clsx(classes.button)} size="small" variant="contained" onClick={() => loadData()}>Refresh</Button>
@@ -159,19 +166,23 @@ export function Configuration() {
               aria-controls="panel1c-content"
               id="panel1c-header"
             >
-              <div className={classes.column}>
+              <Grid container item xs={12} spacing={3}>
                 <Typography className={classes.heading}><strong>{item.name}</strong></Typography>
-              </div>
-              <div className={classes.column}>
+              </Grid>
+              <Grid container item xs={12} spacing={3}>
                 <Typography className={classes.secondaryHeading}>{item.value}</Typography>
-              </div>
+              </Grid>
             </AccordionSummary>
             <AccordionDetails className={classes.details}>
-              <Paper className={classes.inline} >
-                <TextField label="Value" fullWidth className={classes.searchBox} value={item.value} />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <TextField label="Description" fullWidth className={classes.searchBox} value={item.description} />
-              </Paper>
+              {/* <Paper className={classes.inline} > */}
+              <Grid container item xs={6} spacing={3}>
+                <TextField label="Value" fullWidth className={classes.input} value={item.value} />
+              </Grid>
+              <Grid xs={6} spacing={3} />
+              <Grid container item xs={6} spacing={3}>
+                <TextField label="Description" fullWidth className={classes.inut} value={item.description} />
+              </Grid>
+              {/* </Paper> */}
             </AccordionDetails>
             <Divider />
             <AccordionActions>

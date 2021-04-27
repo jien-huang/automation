@@ -67,8 +67,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     scrollUpIcon: {
         position: 'fixed',
-        bottom: 0,
-        right: 0,
+        bottom: 4,
+        right: 4,
         height: 40
     },
     appBar: {
@@ -106,7 +106,7 @@ export const useStyles = makeStyles((theme) => ({
     conorInline: {
         display: 'flex',
         whiteSpace: 'nowrap',
-        margin: theme.spacing(4),
+        margin: theme.spacing(1),
     },
     title: {
         flexGrow: 1,
@@ -129,15 +129,6 @@ export const useStyles = makeStyles((theme) => ({
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
     },
-    // drawerPaper: {
-    //     position: 'relative',
-    //     whiteSpace: 'nowrap',
-    //     width: drawerWidth,
-    //     transition: theme.transitions.create('width', {
-    //         easing: theme.transitions.easing.sharp,
-    //         duration: theme.transitions.duration.enteringScreen,
-    //     }),
-    // },
     drawerPaperClose: {
         overflowX: 'hidden',
         transition: theme.transitions.create('width', {
@@ -151,15 +142,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     searchBox: {
         marginLeft: theme.spacing(2),
-        flex: 1,
         width: theme.spacing(32),
     },
     appBarSpacer: theme.mixins.toolbar,
-    // content: {
-    //     flexGrow: 1,
-    //     // height: '100vh',
-    //     overflow: 'auto',
-    // },
     content: {
         flexGrow: 1,
         overflow: 'auto',

@@ -52,7 +52,7 @@ export function checkItemMatch(item, searchString) {
   return false;
 }
 
-export const DEBOUNCE_PAUSE = 500;
+export const DEBOUNCE_PAUSE = 1000;
 
 // function isValidRegex(str){
 //   var isValid = true;
