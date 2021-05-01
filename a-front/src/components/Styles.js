@@ -96,8 +96,9 @@ export const useStyles = makeStyles((theme) => ({
         display: 'none',
     },
     divider: {
-        height: 28,
+        height: 32,
         margin: 4,
+        padding: 4,
     },
     inline: {
         display: 'flex',

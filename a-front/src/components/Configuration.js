@@ -20,6 +20,7 @@ import Grid from '@material-ui/core/Grid';
 import { debounce, filter } from 'lodash';
 import { InputAdornment } from '@material-ui/core';
 import { checkItemMatch, DEBOUNCE_PAUSE } from '../utils/Constants';
+import  OneTriItems  from './OneTriItems';
 
 export function Configuration() {
   const { enqueueSnackbar } = useSnackbar();
@@ -127,8 +128,11 @@ export function Configuration() {
       <Backdrop className={classes.backdrop} open={loading} >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <h2>Configurations</h2>
-      <Paper className={classes.content}>
+      <div className={classes.conorInline} >
+        <Grid container item xs={18} >
+          <h2>Configuration</h2>
+        </Grid>
+        <Grid container item xs={6} >
         <TextField
           className={classes.searchBox} onChange={handleSearch} value={searchString}
           id="Filter"
@@ -141,7 +145,13 @@ export function Configuration() {
             ),
           }}
         />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </Grid>
+      </div>
+      
+      
+      <Paper className={classes.content}>
+        
+        &nbsp;&nbsp;
         <Button className={clsx(classes.button)} size="small" variant="contained" onClick={() => loadData()}>Refresh</Button>
         &nbsp;&nbsp;
         &nbsp;&nbsp;
@@ -159,37 +169,7 @@ export function Configuration() {
       <Divider className={classes.divider} />
       <div className={classes.plainPaper}>
         {display && display.map(item => (
-          <Accordion className={classes.content} key={item.name}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1c-content"
-              id="panel1c-header"
-            >
-              <Grid container item xs={12} spacing={3}>
-                <Typography className={classes.heading}><strong>{item.name}</strong></Typography>
-              </Grid>
-              <Grid container item xs={12} spacing={3}>
-                <Typography className={classes.secondaryHeading}>{item.value}</Typography>
-              </Grid>
-            </AccordionSummary>
-            <AccordionDetails className={classes.details}>
-              {/* <Paper className={classes.inline} > */}
-              <Grid container item xs={6} spacing={3}>
-                <TextField label="Value" fullWidth className={classes.input} value={item.value} />
-              </Grid>
-              <Grid xs={6} spacing={3} />
-              <Grid container item xs={6} spacing={3}>
-                <TextField label="Description" fullWidth className={classes.inut} value={item.description} />
-              </Grid>
-              {/* </Paper> */}
-            </AccordionDetails>
-            <Divider />
-            <AccordionActions>
-              <Button variant="contained" size="small" onClick={() => deleteData(item.name)}>Delete</Button>
-              <Button variant="contained" size="small" color="primary" onClick={() => updateData(item)}>Update</Button>
-            </AccordionActions>
-          </Accordion>
-
+          <OneTriItems key={item.name} info={item} deleteData={deleteData} updateData={updateData} />
         ))}
       </div>
       {/* <pre>{JSON.stringify(items, null, 2)}</pre> */}
