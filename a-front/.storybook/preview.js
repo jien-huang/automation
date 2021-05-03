@@ -1,6 +1,10 @@
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { 
+    argTypesRegex: "^on.*" ,
+    argTypesRegex: "^update.*",
+    argTypesRegex: "^delete.*"
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,

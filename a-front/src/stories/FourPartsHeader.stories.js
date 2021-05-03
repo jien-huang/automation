@@ -4,33 +4,30 @@ import  FourPartsHeader  from '../../src/components/FourPartsHeader';
 
 export default {
   title: 'FourPartsHeader',
-  component: FourPartsHeader,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  component: FourPartsHeader
 };
 
 const Template = (args) => <FourPartsHeader {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Suite = Template.bind({});
+Suite.args = {
   primary: true,
   label: 'FourPartsHeader',
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const Case = Template.bind({});
+Case.args = {
   label: 'FourPartsHeader',
 };
 
-export const Large = Template.bind({});
-Large.args = {
+export const UI = Template.bind({});
+UI.args = {
   size: 'large',
   label: 'FourPartsHeader',
 };
 
-export const Small = Template.bind({});
-Small.args = {
+export const Data = Template.bind({});
+Data.args = {
   size: 'small',
   label: 'FourPartsHeader',
 };
