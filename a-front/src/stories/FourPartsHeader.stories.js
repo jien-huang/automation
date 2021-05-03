@@ -1,36 +1,36 @@
 import React from 'react';
 
-import { Button } from './Button';
+import  FourPartsHeader  from '../../src/components/FourPartsHeader';
 
 export default {
-  title: 'Example/Button',
-  component: Button,
+  title: 'FourPartsHeader',
+  component: FourPartsHeader,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => <FourPartsHeader {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
   primary: true,
-  label: 'Button',
+  label: 'FourPartsHeader',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  label: 'Button',
+  label: 'FourPartsHeader',
 };
 
 export const Large = Template.bind({});
 Large.args = {
   size: 'large',
-  label: 'Button',
+  label: 'FourPartsHeader',
 };
 
 export const Small = Template.bind({});
 Small.args = {
   size: 'small',
-  label: 'Button',
+  label: 'FourPartsHeader',
 };
