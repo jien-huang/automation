@@ -95,6 +95,12 @@ export const useStyles = makeStyles((theme) => ({
     menuButtonHidden: {
         display: 'none',
     },
+    badge: {
+        right: 1,
+        top: 1,
+        border: `2px solid ${theme.palette.background.paper}`,
+        padding: '0 4px',
+      },
     divider: {
         height: 32,
         margin: 4,
@@ -107,6 +113,7 @@ export const useStyles = makeStyles((theme) => ({
     conorInline: {
         display: 'flex',
         whiteSpace: 'nowrap',
+        alignItems: 'flex-end',
         margin: theme.spacing(1),
     },
     title: {

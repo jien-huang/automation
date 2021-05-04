@@ -1,7 +1,6 @@
 import React from 'react';
 
 import  OneTriItems  from '../../src/components/OneTriItems';
-import Configuration from '../../src/components/Configuration';
 
 export default {
   title: 'OneTriItems',

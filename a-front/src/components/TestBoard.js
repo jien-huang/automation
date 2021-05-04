@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import {DATA_TYPE} from '../utils/Constants';
+import FourPartsHeader from './FourPartsHeader';
 
 
 export function TestBoard(props) {
@@ -24,26 +25,10 @@ export function TestBoard(props) {
             <Backdrop className={classes.backdrop} open={loading} >
                 <CircularProgress color="inherit" />
             </Backdrop>
-            <IconButton className={classes.iconButton} aria-label="Filter">
-                <SearchIcon />
-            </IconButton>
-            <TextField
-                className={classes.input}
-                placeholder="Filter"
-                inputProps={{ 'aria-label': 'Filter' }}
-            />
-        &nbsp;&nbsp;&nbsp;&nbsp;
-            <Button size="small" variant="contained" disabled = {!updated} color="primary">Update</Button>
-        &nbsp;&nbsp;
-            <Button size="small" variant="contained" color="secondary">Delete</Button>&nbsp;&nbsp;
-        &nbsp;&nbsp;
+            
+        
             <Divider className={classes.divider} />
-            {props.info && props.info.type === DATA_TYPE.CASE && <h2>This is a case</h2>}
-            {props.info && props.info.type === DATA_TYPE.DATA && <h2>This is a data</h2>}
-            {props.info && props.info.type === DATA_TYPE.UI && <h2>This is a ui</h2>}
-            {props.info && props.info.type === DATA_TYPE.SUITE && <h2>This is a suite</h2>}
-            {props.info && props.info.type === DATA_TYPE.ROOT && <h2>This is a root</h2>}
-            {props.info && props.info.type === DATA_TYPE.FOLDER && <h2>This is a folder</h2>}
+            <FourPartsHeader />
             <pre>{JSON.stringify(props.info, null, 2)}</pre>
         </Paper>
     )
