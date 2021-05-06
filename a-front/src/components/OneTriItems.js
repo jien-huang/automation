@@ -42,7 +42,7 @@ export default function OneTriItems({info, deleteData, updateData}) {
               </Grid>
             </AccordionSummary>
             <AccordionDetails className={classes.details}>
-              {/* <Paper className={classes.inline} > */}
+              {/* <Paper elevation={3} className={classes.inline} > */}
               <Grid container item xs={5} spacing={3}>
                 <TextField label="Value" fullWidth onChange={handleValueChange} className={classes.input} value={value} />
               </Grid>

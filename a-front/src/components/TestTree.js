@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 export default function TestTree({ parentCallback }) {
     const { enqueueSnackbar } = useSnackbar();
     const classes = useStyles();
-    const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
+    const { get, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
     const [tree, setTree] = useState();
 
     useEffect(() => {

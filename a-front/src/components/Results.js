@@ -65,7 +65,6 @@ export default function Results() {
   }, [items])
 
   const search = debounce(() => {
-    console.log("called")
     if (!searchString || searchString === null || searchString.length === 0) {
       if (items && items.length > 0) {
         setDisplay(items);
@@ -178,7 +177,7 @@ export default function Results() {
         <CircularProgress color="inherit" />
       </Backdrop>
       <div className={classes.conorInline} >
-        <Grid container item xs={18} >
+        <Grid container item xs={12} >
           <h2>Results</h2>
         </Grid>
         <Grid container item xs={6} >
@@ -216,7 +215,7 @@ export default function Results() {
 
       {display && display.length > 0 &&
         <div>
-          <Paper className={classes.content}>
+          <Paper elevation={3} className={classes.content}>
             <TableContainer component={Paper}>
               <Table className={classes.table} aria-label="summary" size={dense ? 'small' : 'medium'}>
                 <TableBody>

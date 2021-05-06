@@ -68,7 +68,7 @@ export function Tests() {
           [classes.contentShift]: open,
         })}
       >
-        <Paper className={classes.inline}>
+        <Paper elevation={3} className={classes.inline}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -79,9 +79,9 @@ export function Tests() {
             <MenuIcon />
           </IconButton>
           <div className={classes.conorInline} >
-            <Grid container item xs={18} >
-              {!board && <Chip variant="outlined" label="Tests" size="large" avatar={<Avatar>T</Avatar>} />}
-              {board && <Chip variant="outlined" label={board.name} color="primary" size="large" avatar={<Avatar>{board.type}</Avatar>} />}
+            <Grid container item xs={12} >
+              {!board && <Chip variant="outlined" label="Tests" size="medium" avatar={<Avatar>T</Avatar>} />}
+              {board && <Chip variant="outlined" label={board.name} color="primary" size="medium" avatar={<Avatar>{board.type}</Avatar>} />}
             </Grid>
             <Grid container item xs={6} >
               <TextField

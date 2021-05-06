@@ -21,7 +21,7 @@ export function TestBoard(props) {
     const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
 
     return (
-        <Paper className={classes.content} >
+        <Paper elevation={3} className={classes.content} >
             <Backdrop className={classes.backdrop} open={loading} >
                 <CircularProgress color="inherit" />
             </Backdrop>

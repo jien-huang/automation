@@ -13,17 +13,17 @@ export default function FourPartsHeader(params) {
 
     return (
         <Grid container spacing={1}>
-            <Grid item xs={6} spacing={3}>
-            <Paper className={classes.paper}>Metadata</Paper>
+            <Grid item xs={6} >
+            <Paper elevation={3} className={classes.paper}>Metadata</Paper>
             </Grid>
-            <Grid item xs={6} spacing={3}>
-            <Paper className={classes.paper}>Default</Paper>
+            <Grid item xs={6} >
+            <Paper elevation={3} className={classes.paper}>Default</Paper>
             </Grid>
-            <Grid item xs={6} spacing={3}>
-            <Paper className={classes.paper}>Input</Paper>
+            <Grid item xs={6} >
+            <Paper elevation={3} className={classes.paper}>Input</Paper>
             </Grid>
-            <Grid item xs={6} spacing={3}>
-            <Paper className={classes.paper}>Output</Paper>
+            <Grid item xs={6} >
+            <Paper elevation={3} className={classes.paper}>Output</Paper>
             </Grid>
         </Grid>
     )

@@ -4,8 +4,9 @@ var config_data = require('./config_data.json');
 var results_data = require('./results_data.json');
 var tests_data = require('./tests_data.json');
 
-var handlers = [];
+
 function getHandlersFromJson(jsonData) {
+	var handlers = [];
 	for (var key of Object.keys(jsonData)) {
 		const el = jsonData[key];
 		if (el.method === 'get') {
@@ -54,10 +55,16 @@ function getHandlersFromJson(jsonData) {
 			}));
 		}
 	}
+	return handlers;
 }
 
-getHandlersFromJson(config_data);
-getHandlersFromJson(results_data);
-getHandlersFromJson(tests_data);
+const config = getHandlersFromJson(config_data);
+const result = getHandlersFromJson(results_data);
+const tests = getHandlersFromJson(tests_data);
+console.log(config)
+var handlers = []
+// handlers = handlers.push(config)
+// handlers = handlers.push(result)
+// handlers = handlers.push(tests)
 
-export { handlers, rest };
+export {config, result, tests, rest };

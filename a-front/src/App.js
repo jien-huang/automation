@@ -10,8 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import { useStyles } from './components/Styles';
 
 if (process.env.NODE_ENV === 'development') {
-  const { handlers } = require('./mocks/handlers');
-  const worker = setupWorker(...handlers);
+  const { config, result, tests } = require('./mocks/handlers');
+  const worker = setupWorker(...config.concat(result).concat(tests));
   worker.start();
 }
 

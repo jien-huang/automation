@@ -123,7 +123,7 @@ export function Configuration() {
         <CircularProgress color="inherit" />
       </Backdrop>
       <div className={classes.conorInline} >
-        <Grid container item xs={18} >
+        <Grid container item xs={12} >
           <h2>Configuration</h2>
         </Grid>
         <Grid container item xs={6} >
@@ -143,7 +143,7 @@ export function Configuration() {
       </div>
       
       
-      <Paper className={classes.content}>
+      <Paper elevation={3} className={classes.content}>
         
         &nbsp;&nbsp;
         <Button className={clsx(classes.button)} size="small" variant="contained" onClick={() => loadData()}>Refresh</Button>
