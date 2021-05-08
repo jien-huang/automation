@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { setupWorker, rest } from 'msw';
 
 var config_data = require('./config_data.json');
 var results_data = require('./results_data.json');
@@ -61,10 +61,6 @@ function getHandlersFromJson(jsonData) {
 const config = getHandlersFromJson(config_data);
 const result = getHandlersFromJson(results_data);
 const tests = getHandlersFromJson(tests_data);
-console.log(config)
-var handlers = []
-// handlers = handlers.push(config)
-// handlers = handlers.push(result)
-// handlers = handlers.push(tests)
-
-export {config, result, tests, rest };
+const worker = setupWorker(...config.concat(result).concat(tests));
+  
+export {worker, config, result, tests, rest };

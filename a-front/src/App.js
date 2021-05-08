@@ -1,5 +1,4 @@
 import React from 'react';
-import { setupWorker } from 'msw';
 import { Switch, Route } from 'react-router-dom';
 import Routes from './Routes';
 import NavigationBar from './components/NavigationBar';
@@ -10,8 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import { useStyles } from './components/Styles';
 
 if (process.env.NODE_ENV === 'development') {
-  const { config, result, tests } = require('./mocks/handlers');
-  const worker = setupWorker(...config.concat(result).concat(tests));
+  const { worker } = require('./mocks/handlers');
   worker.start();
 }
 
