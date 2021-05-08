@@ -21,11 +21,11 @@ function App() {
       <Switch>
         {Routes.map((route) => (
           <Route exact path={route.path} key={route.path}>
-            <Container maxWidth="lg" className={classes.container}>
-                    <Grid container spacing={1}>
+            {/* <Container maxWidth="lg" className={classes.container}> */}
+                    <Grid container item xs={12} spacing={1}>
                     <route.component />
                     </Grid>
-            </Container>
+            {/* </Container> */}
           </Route>
         ))}
       </Switch>

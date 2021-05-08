@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import useFetch from 'use-http';
+import ResultDetails from './ResultDetails';
 
 export default function OneResult() {
     const { id } = useParams();
@@ -34,7 +35,18 @@ export default function OneResult() {
 
 
     return (
-        <pre>{JSON.stringify(items, null, 2)}</pre>
+        <div className={classes.content}>
+            <Backdrop className={classes.backdrop} open={loading} >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            {/* header, contain comments */}
+
+            {/* details */}
+            {items.detail && <ResultDetails info={items.detail} />}
+
+            <pre>{JSON.stringify(items, null, 2)}</pre>
+        </div>
+
     );
 
 }

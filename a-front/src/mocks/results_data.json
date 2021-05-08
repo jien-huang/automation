@@ -30,6 +30,18 @@
 	]},
 	"one_result_data":{"method":"get", "url":"/v1/results/oneResult/1", "status":200, "data":{
 		"id":"1", "suite":"main1.suite", "result":"Success", "start":"2021-04-24 14:14:14", "end":"2021-04-24 20:16:15",
-		"comments":[], "detail":{}
+		"comments":[
+			{"id":"2", "time_stamp": "2021-05-08 10:26:21", "content": "change status to Ignored"},
+			{"id":"3", "time_stamp": "2021-05-08 10:26:21", "content": "change status to Success"},
+			{"id":"4", "time_stamp": "2021-05-08 10:26:21", "content": "change status to Failed"},
+			{"id":"5", "time_stamp": "2021-05-08 10:26:21", "content": "change status to Success"}
+		], 
+		"detail":[
+			{"id":"6", "name": "main1.suite", "time_stamp": "2021-05-08 10:26:21", "content": "Login OK", "result": "Success"},
+			{"id":"7", "name": "main2.suite", "time_stamp": "2021-05-08 10:26:21", "result": "Success", "content": [
+				{"id":"8", "name": "main3.suite", "time_stamp": "2021-05-08 10:26:21", "content": "Book Ticket", "result": "Success"},
+				{"id":"9", "name": "main4.suite", "time_stamp": "2021-05-08 10:26:21", "content": "Validate", "result": "Success"}
+			]}
+		]
 	}}
 }
