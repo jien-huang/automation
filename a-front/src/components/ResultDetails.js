@@ -13,40 +13,42 @@ export default function ResultDetails({ info }) {
     if (Array.isArray(info)) {
         console.log("this is an array", info)
         return (
-            
+
             info.map(element => {
                 return (
                     <Grid container item xs={12} spacing={3} key={element.id}>
-                <Accordion className={classes.content} >
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1c-content"
-                        id="panel1c-header" >
-                        <Grid container item xs={4} spacing={3}>
-                            <Typography className={classes.heading}><strong>{element.name}</strong></Typography>
-                        </Grid>
-                        <Grid container item xs={4} spacing={3}>
-                            <Typography className={classes.secondaryHeading}>{element.result}</Typography>
-                        </Grid>
-                        <Grid container item xs={4} spacing={3}>
-                            <Typography className={classes.secondaryHeading}>{element.time_stamp}</Typography>
-                        </Grid>
-                    </AccordionSummary>
-                    <AccordionDetails className={classes.details}>
-                        {Array.isArray(element.content) &&
-                        <Grid container item xs={12} spacing={3}>
-                            <ResultDetails info={element.content} />
-                        </Grid>}
-                        {!Array.isArray(element.content) &&
-                        <Grid container item xs={12} spacing={3}>
-                            <Typography className={classes.secondaryHeading}>{element.content}</Typography>
-                        </Grid>}
-                    </AccordionDetails>
-                </Accordion>
-                </Grid>
+                        <Accordion className={classes.content} >
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1c-content"
+                                id="panel1c-header" >
+                                <Grid container item xs={4} spacing={3}>
+                                    <Typography className={classes.heading}><strong>{element.name}</strong></Typography>
+                                </Grid>
+                                <Grid container item xs={4} spacing={3}>
+                                    {element.result === "Success" && <Typography color="primary" className={classes.secondaryHeading}>{element.result}</Typography>}
+                                    {element.result === "Failed" && <Typography color="error" className={classes.secondaryHeading}>{element.result}</Typography>}
+                                    {element.result === "Ignored" && <Typography color="textSecondary" className={classes.secondaryHeading}>{element.result}</Typography>}
+                                </Grid>
+                                <Grid container item xs={4} spacing={3}>
+                                    <Typography className={classes.secondaryHeading}>{element.time_stamp}</Typography>
+                                </Grid>
+                            </AccordionSummary>
+                            <AccordionDetails className={classes.details}>
+                                {Array.isArray(element.content) &&
+                                    <Grid container item xs={12} spacing={3}>
+                                        <ResultDetails info={element.content} />
+                                    </Grid>}
+                                {!Array.isArray(element.content) &&
+                                    <Grid container item xs={12} spacing={3}>
+                                        <Typography className={classes.secondaryHeading}>{element.content}</Typography>
+                                    </Grid>}
+                            </AccordionDetails>
+                        </Accordion>
+                    </Grid>
                 )
             })
-        
+
         );
     }
     return (
@@ -59,7 +61,9 @@ export default function ResultDetails({ info }) {
                     <Typography className={classes.heading}><strong>{info.name}</strong></Typography>
                 </Grid>
                 <Grid container item xs={4} spacing={3}>
-                    <Typography className={classes.secondaryHeading}>{info.result}</Typography>
+                    {info.result === "Success" && <Typography color="primary" className={classes.secondaryHeading}>{info.result}</Typography>}
+                    {info.result === "Failed" && <Typography color="error" className={classes.secondaryHeading}>{info.result}</Typography>}
+                    {info.result === "Ignored" && <Typography color="textSecondary" className={classes.secondaryHeading}>{info.result}</Typography>}
                 </Grid>
                 <Grid container item xs={4} spacing={3}>
                     <Typography className={classes.secondaryHeading}>{info.time_stamp}</Typography>

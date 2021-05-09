@@ -33,6 +33,12 @@ export const DATA_TYPE= {
     SUITE: 'suite'
 }
 
+export const RESULT_TYPE = {
+  SUCCESS: 'Success',
+  IGNORED: 'Ignored',
+  FAILED: 'Failed'
+}
+
 export const API_GET_ALL_RESULTS = "/v1/results";
 
 export function checkItemMatch(item, searchString) {

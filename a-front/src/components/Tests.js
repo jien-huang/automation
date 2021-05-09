@@ -19,7 +19,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import TestTree from './TestTree';
 import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+
 
 export function Tests() {
   const { enqueueSnackbar } = useSnackbar();
@@ -80,8 +83,11 @@ export function Tests() {
           </IconButton>
           <div className={classes.conorInline} >
             <Grid container item xs={12} >
-              {!board && <Chip variant="outlined" label="Tests" size="medium" avatar={<Avatar>T</Avatar>} />}
-              {board && <Chip variant="outlined" label={board.name} color="primary" size="medium" avatar={<Avatar>{board.type}</Avatar>} />}
+              {!board && <h2 >Tests</h2>}
+              {board && <FormControl margin="dense" variant="outlined">
+                <InputLabel htmlFor="component-outlined">{board.type}</InputLabel>
+                <OutlinedInput id="component-outlined" value={board.name} disabled="true" label="Name" />
+              </FormControl>}
             </Grid>
             <Grid container item xs={6} >
               <TextField

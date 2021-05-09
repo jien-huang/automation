@@ -14,10 +14,10 @@ Simple.args = {
     info: [
         { "id": "6", "name": "main1.suite", "time_stamp": "2021-05-08 10:26:21", "content": "Login OK", "result": "Success" },
         {
-            "id": "7", "name": "main2.suite", "time_stamp": "2021-05-08 10:26:21", "result": "Success", "content":
+            "id": "7", "name": "main2.suite", "time_stamp": "2021-05-08 10:26:21", "result": "Ignored", "content":
                 [
                     { "id": "8", "name": "main3.suite", "time_stamp": "2021-05-08 10:26:21", "content": "Book Ticket", "result": "Success" },
-                    { "id": "9", "name": "main4.suite", "time_stamp": "2021-05-08 10:26:21", "content": "Validate", "result": "Success" }
+                    { "id": "9", "name": "main4.suite", "time_stamp": "2021-05-08 10:26:21", "content": "Validate", "result": "Failed" }
                 ]
         }
     ]
