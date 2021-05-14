@@ -58,6 +58,10 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor:
             theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
     },
+    smallTag: {
+        color: 'white',
+        backgroundColor: 'black',
+    },
     toolbarIcon: {
         display: 'flex',
         alignItems: 'center',

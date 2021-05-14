@@ -15,7 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import useFetch from 'use-http';
-import { columns, API_GET_ALL_RESULTS, checkItemMatch, DEBOUNCE_PAUSE } from '../utils/Constants';
+import { columns, API_GET_ALL_RESULTS, checkItemMatch, DEBOUNCE_PAUSE, RESULT_TYPE } from '../utils/Constants';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Switch from '@material-ui/core/Switch';
@@ -94,13 +94,13 @@ export default function Results() {
       var _ignored = 0;
       var _failed = 0;
       display.forEach(element => {
-        if (element.result === 'Success') {
+        if (element.result === RESULT_TYPE.SUCCESS) {
           _success++;
         }
-        if (element.result === 'Ignored') {
+        if (element.result === RESULT_TYPE.IGNORED) {
           _ignored++;
         }
-        if (element.result === 'Failed') {
+        if (element.result === RESULT_TYPE.FAILED) {
           _failed++;
         }
 

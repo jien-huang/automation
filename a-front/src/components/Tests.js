@@ -1,35 +1,24 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useStyles } from './Styles';
-import { useSnackbar } from 'notistack';
 import Drawer from '@material-ui/core/Drawer';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { TestBoard } from './TestBoard';
-import useFetch from 'use-http';
-import { DATA_TYPE } from '../utils/Constants';
 import { InputAdornment } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import TestTree from './TestTree';
-import Avatar from '@material-ui/core/Avatar';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Typography from '@material-ui/core/Typography';
 
 
 export function Tests() {
-  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const [searchString, setSearchString] = useState('');
-  const { get, post, response, loading, error } = useFetch(process.env.REACT_APP_HOST_URL)
-  const [items, setItems] = useState({});
   const [open, setOpen] = React.useState(false);
   const [board, setBoard] = useState();
   const callback = (data) => {
@@ -52,10 +41,6 @@ export function Tests() {
     <div className={clsx(classes.content, {
       [classes.appBarShift]: open,
     })}>
-      <Backdrop className={classes.backdrop} open={loading} >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-
       <Drawer className={classes.drawer} variant="persistent" anchor="left" open={open} classes={{ paper: classes.drawerPaper, }}>
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
@@ -83,11 +68,21 @@ export function Tests() {
           </IconButton>
           <div className={classes.conorInline} >
             <Grid container item xs={12} >
-              {!board && <h2 >Tests</h2>}
-              {board && <FormControl margin="dense" variant="outlined">
-                <InputLabel htmlFor="component-outlined">{board.type}</InputLabel>
-                <OutlinedInput id="component-outlined" value={board.name} disabled="true" label="Name" />
-              </FormControl>}
+              {!board &&
+                <Typography variant="subtitle1" gutterBottom>
+                  Tests
+                </Typography>}
+
+              {board &&
+                <div className={classes.conorInline} margin="dense">
+                  <Typography variant="caption" className={classes.smallTag} display="block" gutterBottom>
+                    { board.type }
+                  </Typography>
+                  <span>&nbsp;</span>
+                  <Typography variant="subtitle1" gutterBottom>
+                    {board.name}
+                  </Typography>
+                </div>}
             </Grid>
             <Grid container item xs={6} >
               <TextField
