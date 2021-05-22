@@ -85,7 +85,7 @@ module.exports = {
         "max-statements": "off",
         "max-statements-per-line": "off",
         "multiline-comment-style": [
-            "error",
+            "off",
             "separate-lines"
         ],
         "new-parens": "off",

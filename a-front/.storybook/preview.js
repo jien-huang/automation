@@ -1,7 +1,8 @@
 
 import { SnackbarProvider } from 'notistack';
-import { BrowserRouter } from 'react-router-dom';
 import {worker} from '../src/mocks/handlers';
+import { Copyright } from '../src/components/Copyright';
+import ScrollTop from '../src/components/ScrollTop';
 
 if (!global.process) {
   worker.start();
@@ -11,6 +12,8 @@ export const decorators = [
     
       <SnackbarProvider maxSnack={5}>
         <Story />
+        <Copyright />
+        <ScrollTop />
       </SnackbarProvider>
     
   ),

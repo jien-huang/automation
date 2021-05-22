@@ -73,6 +73,7 @@ export const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         bottom: 4,
         right: 4,
+        fontSize: 40,
         height: 40
     },
     appBar: {
