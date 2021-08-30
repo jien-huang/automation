@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: a-front
+  labels:
+    app: a-front
+spec:
+  selector:
+    matchLabels:
+      app: a-front
+  template:
+    metadata:
+      labels:
+        app: a-front
+    spec:
+      containers:
+      - name: a-front
+        image: a-front
+        ports:
+        - containerPort: 443
