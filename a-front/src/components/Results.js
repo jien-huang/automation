@@ -2,28 +2,28 @@ import React, { useState, useEffect } from 'react';
 // import clsx from 'clsx';
 import { useStyles } from './Styles';
 import { useSnackbar } from 'notistack';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+import Link from '@mui/material/Link';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TablePagination from '@mui/material/TablePagination';
 import useFetch from 'use-http';
 import { columns, API_GET_ALL_RESULTS, checkItemMatch, DEBOUNCE_PAUSE, RESULT_TYPE } from '../utils/Constants';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Switch from '@material-ui/core/Switch';
-import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import Switch from '@mui/material/Switch';
+import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
 import { debounce, filter } from 'lodash';
-import { InputAdornment } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { InputAdornment } from '@mui/material';
+import Grid from '@mui/material/Grid';
 
 export default function Results() {
   const { enqueueSnackbar } = useSnackbar();
@@ -199,6 +199,11 @@ export default function Results() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
+        count={display ? display.length : 0}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
         ActionsComponent={() => {
           return (<div className={classes.conorInline}><FormControlLabel
             control={<Switch checked={dense} onChange={handleChangeDense} />}
@@ -206,11 +211,7 @@ export default function Results() {
           />
           </div>)
         }}
-        count={display ? display.length : 0}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
+        
       />
 
       {display && display.length > 0 &&

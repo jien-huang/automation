@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useStyles} from './Styles';
-import Icon from '@material-ui/core/Icon';
+import Icon from '@mui/material/Icon';
 
 
 const triggerPx = 100; // when you scroll down this number of pixels, then the scroll up button show

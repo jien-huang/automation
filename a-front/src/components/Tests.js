@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useStyles } from './Styles';
-import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Drawer from '@mui/material/Drawer';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { TestBoard } from './TestBoard';
-import { InputAdornment } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
+import { InputAdornment } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
 import TestTree from './TestTree';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 
 export function Tests() {
@@ -74,7 +74,7 @@ export function Tests() {
                 </Typography>}
 
               {board &&
-                <div className={classes.conorInline} margin="dense">
+                <div className={classes.conorInline} >
                   <Typography variant="caption" className={classes.smallTag} display="block" gutterBottom>
                     { board.type }
                   </Typography>

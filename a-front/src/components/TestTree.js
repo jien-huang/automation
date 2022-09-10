@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useStyles } from './Styles';
 import { useSnackbar } from 'notistack';
-import TreeView from '@material-ui/lab/TreeView';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
-import RefreshIcon from '@material-ui/icons/Refresh';
+import TreeView from '@mui/lab/TreeView';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import TreeItem from '@mui/lab/TreeItem';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import useFetch from 'use-http';
 import { DATA_TYPE } from '../utils/Constants';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 
 export default function TestTree({ parentCallback }) {
     const { enqueueSnackbar } = useSnackbar();

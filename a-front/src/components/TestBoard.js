@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './Styles';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
 import FourPartsHeader from './FourPartsHeader';
 
 

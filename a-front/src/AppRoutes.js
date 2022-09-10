@@ -3,7 +3,7 @@ import Results from './components/Results';
 import OneResult from './components/OneResult';
 import { Tests } from './components/Tests';
 
-const Routes = [
+const AppRoutes = [
   {
     path: '/',
     sidebarName: 'Results',
@@ -28,4 +28,4 @@ const Routes = [
   },
 ];
 
-export default Routes;
+export default AppRoutes;

@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import clsx from 'clsx';
 import { useStyles } from './Styles';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-import SearchIcon from '@material-ui/icons/Search';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+import SearchIcon from '@mui/icons-material/Search';
 import { useSnackbar } from 'notistack';
 import useFetch from 'use-http';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import { debounce, filter } from 'lodash';
-import { InputAdornment } from '@material-ui/core';
+import { InputAdornment } from '@mui/material';
 import { checkItemMatch, DEBOUNCE_PAUSE } from '../utils/Constants';
 import  OneTriItems  from './OneTriItems';
 
@@ -118,6 +118,7 @@ export function Configuration() {
   }
 
   return (
+    <Grid container item xs={12} spacing={1}>
     <div className={classes.content}>
       <Backdrop className={classes.backdrop} open={loading} >
         <CircularProgress color="inherit" />
@@ -168,5 +169,6 @@ export function Configuration() {
       </div>
       {/* <pre>{JSON.stringify(items, null, 2)}</pre> */}
     </div>
+    </Grid>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, test, expect } from '@testing-library/react';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 test('renders learn react link', () => {

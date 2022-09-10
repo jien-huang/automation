@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
-import Routes from '../Routes';
-import ListItemIcon from '@material-ui/core/ListItem';
+import { NavLink, useNavigate } from 'react-router-dom';
+import AppRoutes from '../AppRoutes';
+import ListItemIcon from '@mui/material/ListItem';
 import {
   AppBar,
   Toolbar,
@@ -10,13 +10,14 @@ import {
   Drawer,
   MenuList,
   Icon,
-} from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import MenuIcon from '@material-ui/icons/Menu';
+} from '@mui/material';
+import Divider from '@mui/material/Divider';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useStyles } from './Styles';
 
 const NavigationBar = (props) => {
+  const navigate = useNavigate();
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = (open) => {
@@ -54,7 +55,7 @@ const NavigationBar = (props) => {
           </div>
           <Divider />
           <MenuList>
-            {Routes.map((prop, key) => {
+            {AppRoutes.map((prop, key) => {
               if (prop.icon && prop.sidebarName){
                 return (
                   <NavLink to={prop.path} style={{ textDecoration: 'none' }} key={key} onClick={() => activeRoute(prop.path)}>
@@ -74,4 +75,4 @@ const NavigationBar = (props) => {
   );
 };
 
-export default withRouter(NavigationBar);
+export default (NavigationBar);
